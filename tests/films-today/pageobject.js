@@ -9,12 +9,12 @@ const FilmTodayCommands = require('./commands/commands-films-today.js');
 
 class FilmTodayPO extends FilmTodayCommands
 {
-    //get Today's carousel
-    get Carousel () { return }
+    //get Today's carousel Name
+    get nameCarousel () { return $('data-tid="e5b8accf"')}
 
     //get Array of all Snippets
-    get SnipetsArray() { return $$('div.carousel__item.carousel__item_desktop.today-in-cinema__carousel-item')}
+    get snipetsArray() { return $$('div.carousel__item.carousel__item_desktop.today-in-cinema__carousel-item')}
 
     //get Array all links
-    get LinksToSnipp () { return }
+    get linksToSnipp () { return }
 }
