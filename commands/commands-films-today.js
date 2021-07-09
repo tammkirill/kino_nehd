@@ -1,6 +1,6 @@
-const OpenPage = require('./OpenPage');
+const Page = require('./OpenPage');
 
-class FilmTodayCommands extends OpenPage 
+class FilmTodayCommands extends Page 
 {
     /**
      * a method to encapsule automation code to interact with the page

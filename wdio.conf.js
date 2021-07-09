@@ -24,7 +24,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./features/**/Not_shown*.feature'], 
+        ['./features/**/*.feature'], 
     // Patterns to exclude.
     exclude: [
         //
@@ -72,7 +72,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'error',
+    logLevel: 'debug',
     //
     // Set specific log levels per logger
     // loggers:
@@ -141,7 +141,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/*/steps_stealth.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ['./step-definition/films-today/courusel-visible.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
