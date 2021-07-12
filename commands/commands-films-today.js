@@ -6,14 +6,26 @@ class FilmTodayCommands extends Page
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
     */
-    async login (username, password) {
-        await (await this.inputUsername).setValue(username);
-        await (await this.inputPassword).setValue(password);
-        await (await this.btnSubmit).click();
-    }
+    async compareLinks(stringURL, link, regularExp)
+    {
+        //get string lenght 
+        const needLength = await link.length;
 
-    async checkStealth() {
-        await (await this.checkBox).click();
+        //get link to compare
+        let stringURLstart = await stringURL.slice(0, needLength);
+        
+        console.log(stringURLstart);
+
+        //get part to compare with regular expression
+        let stringURLregular = await stringURL.slice(needLength+1);
+
+        console.log(stringURLregular);
+
+        //compare expected and actual addresses
+        let result = (stringURLstart === link && stringURLregular.match(regularExp))? true: false;
+
+        return result;
+
     }
 
     /**
