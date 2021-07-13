@@ -31,13 +31,13 @@ When (/^I see button named (.+) and click it$/, async (button) => {
 Then (/^I should be on the page of today's films: (.+)$/, async (linkName) => {
     
     //get current URL
-    let stringURL = browser.url();
+    let stringURL = await browser.getUrl();
 
     //regExp for part of the city
     let regExp = /^(city)\/\d+\/$|^\s*$/;
 
     //check link
-    if (!Command.compareLinks(stringURL, linkName, regExp)){
+    if (await !Command.compareLinks(stringURL, linkName, regExp)){
         assert.fail('Link {stringURL} is incorrect'.replace('{stringURL}', stringURL));
     }
     

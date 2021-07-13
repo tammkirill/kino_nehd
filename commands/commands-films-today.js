@@ -17,7 +17,7 @@ class FilmTodayCommands extends Page
         console.log(stringURLstart);
 
         //get part to compare with regular expression
-        let stringURLregular = await stringURL.slice(needLength+1);
+        let stringURLregular = await stringURL.slice(needLength);
 
         console.log(stringURLregular);
 
