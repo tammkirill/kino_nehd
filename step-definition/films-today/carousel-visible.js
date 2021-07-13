@@ -16,17 +16,17 @@ When (/^I just wait$/, async () => {
 
 });
 
-Then (/^I should see Courusel with (.+)$/, async (name) => {
-    const courusel = await PageObjects.headingCarousel;
+Then (/^I should see Carousel with (.+)$/, async (name) => {
+    const carousel = await PageObjects.headingCarousel;
 
-    //Check if courusel films today is visible
-    if (! await courusel[0].isDisplayed()){
-        assert.fail('Courusel is not visible');
+    //Check if carousel films today is visible
+    if (! await carousel[0].isDisplayed()){
+        assert.fail('Carousel is not visible');
     }
 
-    //get courusel Name class
-    let couruselName = await courusel[0].$('h3');
+    //get carousel Name class
+    let carouselName = await carousel[0].$('h3');
 
     //Check if Courusel name is what we are expecting
-    assert.strictEqual(name, await couruselName.getText());
+    assert.strictEqual(name, await carouselName.getText());
 }); 

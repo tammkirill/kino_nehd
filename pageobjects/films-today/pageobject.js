@@ -26,7 +26,7 @@ class FilmTodayPO
     /// Right versions of: Name, poster, year, rating ///
 
     //get Name and Year of a film 
-    get rightName() {return $$('[data-tid="67e47501"]')}
+    get rightName() {return $('[data-tid="67e47501"]')}
 
     //get
 
