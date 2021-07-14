@@ -8,7 +8,8 @@ const MainPage = require('../../commands/commands-films-today');
 
 const PageObjects = require('../../pageobjects/films-today/pageobject');
 
-const Command = require('../../commands/commands-films-today')
+const Command = require('../../commands/commands-films-today');
+
 
 Given (/^I am on the main page$/, async () => {
     await MainPage.open("");
@@ -18,7 +19,7 @@ When (/^I see Carousel with Snippets$/, async () => {
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
 
-    for (let i = 0; i <= snippetsArr.length; i++) 
+    for (let i = 0; i < snippetsArr.length; i++) 
     {
         if (!snippetsArr[i].isExisting())
         {
@@ -28,22 +29,39 @@ When (/^I see Carousel with Snippets$/, async () => {
 
 });
 
-Then (/^I should be on the page of today's films: (.+)$/, async (linkName) => {
+Then (/^I click on Snippet and should be on the (.+)$/, async (linkName) => {
     
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
 
-    //regExp for part of link
-    let regExp = /^\d+$/;
+    let linkArr = await Command.smthArray(snippetsArr, "a");
 
-    for (let i = 0; i <= snippetsArr.length; i++)
+    //regExp for part of link
+    let regExp = /^\d+\/$/;    
+
+    
+
+    //check all snippets links
+    for (let i = 0; i < await linkArr.length-1; i++)
     {
+        
+        let linkItem = await linkArr[i];
+
+        //go to the link of snippet
+        await linkItem.click();
+
+        stringURL = await browser.getUrl();
+
+        //Check if link have right form
+        if (!await Command.compareLinks(stringURL, linkName, regExp)){
+            assert.fail('Link {stringURL} is incorrect'.replace('{stringURL}', stringURL));
+        }
+
+        await browser.back();
         
     }
 
     //check link
-    if (!await Command.compareLinks(stringURL, linkName, regExp)){
-        assert.fail('Link {stringURL} is incorrect'.replace('{stringURL}', stringURL));
-    }
+    
     
 }); 

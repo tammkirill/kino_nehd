@@ -4,9 +4,8 @@ Feature: Snippet link
 
     Given I am on the main page
     When I see Carousel with Snippets 
-    And click it
-    Then I should be on the page of today's films: <link>
+    Then I click on Snippet and should be on the <link>
 
     Examples:
       | buttonName      | link                                 |
-      | Все             | https://www.kinopoisk.ru/afisha/new/ |
+      | Все             | https://www.kinopoisk.ru/film/       |

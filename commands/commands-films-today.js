@@ -13,19 +13,33 @@ class FilmTodayCommands extends Page
 
         //get link to compare
         let stringURLstart = await stringURL.slice(0, needLength);
-        
-        console.log(stringURLstart);
 
         //get part to compare with regular expression
         let stringURLregular = await stringURL.slice(needLength);
-
-        console.log(stringURLregular);
 
         //compare expected and actual addresses
         let result = (stringURLstart === link && stringURLregular.match(regularExp))? true: false;
 
         return result;
 
+    }
+
+    //get Array of needed things
+    async smthArray(snippetArr, objectName)
+    {
+
+        let smthArr = new Array();
+
+        console.error( snippetArr.length);
+
+        for (let i = 0; i <  snippetArr.length; i++)
+        {
+        
+            smthArr[i] =  snippetArr[i].$(objectName);
+
+        }   
+
+        return smthArr;
     }
 
     /**
