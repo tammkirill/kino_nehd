@@ -34,10 +34,10 @@ Then (/^I click on Snippet and should be on the (.+)$/, async (linkName) => {
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
 
-    let linkArr = await Command.smthArray(snippetsArr, "a");
+    let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
     //regExp for part of link
-    let regExp = /^\d+\/$/;    
+    let regExp = /^\d{1,5}x\d{1,5}$/;    
 
     
 
@@ -50,7 +50,7 @@ Then (/^I click on Snippet and should be on the (.+)$/, async (linkName) => {
         //go to the link of snippet
         await linkItem.click();
 
-        stringURL = await browser.getUrl();
+        linkName = await browser.getUrl();
 
         //Check if link have right form
         if (!await Command.compareLinks(stringURL, linkName, regExp)){

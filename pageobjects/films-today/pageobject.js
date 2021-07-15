@@ -28,6 +28,17 @@ class FilmTodayPO
     //get Name and Year of a film 
     get rightName() {return $('[data-tid="67e47501"]')}
 
+    //get picture of the film
+    async getPicture(document) 
+    {
+        return document.$('[data-tid="d813cf42"]');
+    }
+
+    //get child 'a'
+    async getChildA(document)
+    {
+        return document.$('a');
+    }
 }
 
 module.exports = new FilmTodayPO();

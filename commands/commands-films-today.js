@@ -1,11 +1,15 @@
 const Page = require('./OpenPage');
 
+const PageObjects = require('../pageobjects/films-today/pageobject');
+
 class FilmTodayCommands extends Page 
 {
     /**
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
     */
+
+    /** Commands that do something */
     async compareLinks(stringURL, link, regularExp)
     {
         //get string lenght 
@@ -24,18 +28,18 @@ class FilmTodayCommands extends Page
 
     }
 
+    /** Get commands */
+
     //get Array of needed things
-    async smthArray(snippetArr, objectName)
+    async smthArray(snippetArr, getFunc)
     {
 
         let smthArr = new Array();
 
-        console.error( snippetArr.length);
-
         for (let i = 0; i <  snippetArr.length; i++)
         {
         
-            smthArr[i] =  snippetArr[i].$(objectName);
+            smthArr[i] =  getFunc(snippetArr[i]);
 
         }   
 
