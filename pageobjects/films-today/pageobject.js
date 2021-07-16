@@ -13,6 +13,8 @@ Contains:
 class FilmTodayPO
 {
     
+    //get Today's carousel snippets
+    get todayCarousel () {return $('[class="carousel carousel_desktop today-in-cinema__carousel"]')}
 
     //get Today's carousel Name
     get headingCarousel () { return $$('[data-tid="e5b8accf"]')}
@@ -38,6 +40,12 @@ class FilmTodayPO
     async getChildA(document)
     {
         return document.$('a');
+    }
+
+    //get Arrow to scroll
+    async getArrow(document) 
+    {
+        return document.$('[data-tid="e3b85fc5"]');
     }
 }
 

@@ -10,7 +10,8 @@ const PageObjects = require('../../pageobjects/films-today/pageobject');
 
 const Command = require('../../commands/commands-films-today');
 
-const SecondObjects = require('../../pageobjects/film/pageobject')
+const SecondObjects = require('../../pageobjects/film/pageobject');
+
 
 
 Given (/^I am on the main page$/, async () => {
@@ -32,6 +33,9 @@ When (/^I see Carousel with Snippets$/, async () => {
 });
 
 Then (/^I can see the right picture of the film$/, async () => {
+
+    //get carousel, to get arrow
+    const carousel = await PageObjects.todayCarousel;
     
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
@@ -49,13 +53,21 @@ Then (/^I can see the right picture of the film$/, async () => {
         //tmp picture part
         let pictureItem = await pictureArr[i];
 
-        //link of the picture
-        let pictureLink = await pictureItem.getProperty('src');
-
-        if (await pictureLink === null)
+        let pictureLink;
+        
+        if (await pictureItem.isDisplayed())
         {
-            pictureLink = await pictureItem.getProperty('data-src');
+            pictureLink = await pictureItem.getAttribute('src'); 
         }
+        else
+        {
+            pictureLink = await pictureItem.getAttribute('data-src'); 
+
+        }
+
+        
+
+               
 
         //cut size of the picture
         let tmpSize;
@@ -68,7 +80,7 @@ Then (/^I can see the right picture of the film$/, async () => {
             }
         }
 
-        linkName = pictureLink.slice(0,tmpSize+1);
+        linkName = await pictureLink.slice(0,tmpSize+1);
 
         
 
@@ -82,11 +94,11 @@ Then (/^I can see the right picture of the film$/, async () => {
 
         const rightPicture = await SecondObjects.getPicture(rightPoster);
 
-        let rightLink = await rightPicture.getProperty('src');
+        let rightLink = await rightPicture.getAttribute('src');
 
         //Check if link have right form
         if (!await Command.compareLinks(rightLink, linkName, regExp)){
-            assert.fail('Link {pictureLink} is incorrect'.replace('{pictureLink}', linkName));
+            assert.fail('Link {linkName} is incorrect'.replace('{linkName}', linkName));
         }
 
         await browser.back();
