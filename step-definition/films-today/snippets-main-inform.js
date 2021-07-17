@@ -1,4 +1,4 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { Given, When, Then, And } = require('@cucumber/cucumber');
 
 const assert = require('assert');
 
@@ -32,7 +32,7 @@ When (/^I see Carousel with Snippets$/, async () => {
 
 });
 
-Then (/^I can see right picture of the film$/, async () => {
+Then (/^I can see right title of the film $/, async () => {
     
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
@@ -98,5 +98,17 @@ Then (/^I can see right picture of the film$/, async () => {
         await browser.back();
         
     }
+
+});
+
+And (/^I can see right year$/, async () => {
+
+
+
+});
+
+And (/^I can see right genre$/, async () => {
+
+
 
 });

@@ -28,7 +28,7 @@ class FilmTodayPO
     /// Right versions of: Name, poster, year, rating ///
 
     //get Name and Year of a film 
-    get rightName() {return $('[data-tid="67e47501"]')}
+    get snippetName() {return $('[data-tid="67e47501"]')}
 
     //get picture of the film
     async getPicture(document) 
@@ -46,6 +46,18 @@ class FilmTodayPO
     async getArrow(document) 
     {
         return document.$('[data-tid="e3b85fc5"]');
+    }
+
+    //get Span to get a name of the film
+    async getSpan(document)
+    {
+        return document.$('span');
+    }
+
+    //get Year and Genre of the film
+    async getYearGenre(document)
+    {
+        return document.$('[class="film-poster-snippets1l1ba0i183r5uc0ozz__caption film-poster-snippets1l1ba0i183r5uc0ozz__caption_theme_default"]')
     }
 }
 
