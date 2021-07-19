@@ -22,6 +22,9 @@ class FilmPO
     //get genre array
     get filmGenreArr() {return $('[data-tid="d61dc135"]')}
 
+    //get year of the film
+    get filmYear() {return $('[data-tid="a189db02"]')}
+
     //get picture of the film
     async getPicture(document) 
     {

@@ -57,7 +57,7 @@ class FilmTodayPO
     //get Year and Genre of the film
     async getYearGenre(document)
     {
-        return document.$('[class="film-poster-snippets1l1ba0i183r5uc0ozz__caption film-poster-snippets1l1ba0i183r5uc0ozz__caption_theme_default"]')
+        return document.$('[class="film-poster-snippet-partial-component__caption film-poster-snippet-partial-component__caption_theme_default"]')
     }
 }
 
