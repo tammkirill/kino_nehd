@@ -1,13 +1,9 @@
 /**
 pageobjects of Films Today
 Contains:
-1. buttons
-2. snippets
-3. links
-*/
-
-/**
-     * Always asking for arrays to avoid dinamic issues (if array is > 1 than tests need to be refactored)
+1. poster
+2. title
+3. information about film
 */
 
 class FilmPO
@@ -24,6 +20,9 @@ class FilmPO
 
     //get year of the film
     get filmYear() {return $('[data-tid="a189db02"]')}
+
+    //get film rating
+    get filmRating() {return $('[data-tid="125104c7"]')}
 
     //get picture of the film
     async getPicture(document) 

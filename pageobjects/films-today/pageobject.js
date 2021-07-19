@@ -59,6 +59,11 @@ class FilmTodayPO
     {
         return document.$('[class="film-poster-snippet-partial-component__caption film-poster-snippet-partial-component__caption_theme_default"]')
     }
+
+    async getRating(document)
+    {
+        return document.$('[data-tid="83f4f39d"]');
+    }
 }
 
 module.exports = new FilmTodayPO();

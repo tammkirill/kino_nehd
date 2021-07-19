@@ -45,7 +45,7 @@ Then (/^I can see right title of the film$/, async () => {
 
 
     //check all snippets links
-    for (let i = 35; i < linkArr.length-1; i++)
+    for (let i = 0; i < linkArr.length-1; i++)
     {
         //tmp picture part
         let titleItem = await titleArr[i];
