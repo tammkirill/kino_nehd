@@ -6,4 +6,4 @@ Feature: Snippet title, year and genre
     When I see Carousel with Snippets 
     Then I can see right title of the film 
     And I can see right year
-    And I can see genre
+    And I can see right genre

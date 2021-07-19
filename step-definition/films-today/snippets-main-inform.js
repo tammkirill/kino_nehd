@@ -1,4 +1,4 @@
-const { Given, When, Then, And } = require('@cucumber/cucumber');
+const { Given, When, Then } = require('@cucumber/cucumber');
 
 const assert = require('assert');
 
@@ -32,67 +32,40 @@ When (/^I see Carousel with Snippets$/, async () => {
 
 });
 
-Then (/^I can see right title of the film $/, async () => {
+Then (/^I can see right title of the film$/, async () => {
     
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
 
+    snippetsArr.splice(0,1);
+
     let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
-    let pictureArr = await Command.smthArray(snippetsArr, PageObjects.getPicture);
+    let titleArr = await Command.smthArray(snippetsArr, PageObjects.getName);
 
-    //regExp for part of link
-    let regExp = /^\d{1,5}x\d{1,5}$/;    
 
     //check all snippets links
     for (let i = 0; i < linkArr.length-1; i++)
     {
         //tmp picture part
-        let pictureItem = await pictureArr[i];
+        let titleItem = await titleArr[i];
 
-        let pictureLink;
+        let titleFilm = await titleItem.getText();
         
-        if (await pictureItem.isDisplayed())
-        {
-            pictureLink = await pictureItem.getAttribute('src'); 
-        }
-        else
-        {
-            pictureLink = await pictureItem.getAttribute('data-src'); 
-
-        }
-   
-
-        //cut size of the picture
-        let tmpSize;
-        for (let i = pictureLink.length-1; i >= 0; i--)
-        {
-            if (await pictureLink[i] == '/')
-            {
-                tmpSize = i;
-                break;
-            }
-        }
-
-        linkName = await pictureLink.slice(0,tmpSize+1);
-
-        
-
         //tmp link part
         let linkItem = await linkArr[i];
 
         //go to the link of snippet
         await linkItem.click();
 
-        const rightPoster = await SecondObjects.poster;
+        //get object of a film title on a film page
+        const rightName = await SecondObjects.filmTitle;
 
-        const rightPicture = await SecondObjects.getPicture(rightPoster);
+        let nameText = await rightName.getText();
 
-        let rightLink = await rightPicture.getAttribute('src');
-
-        //Check if link have right form
-        if (!await Command.compareLinks(rightLink, linkName, regExp)){
-            assert.fail('Link {linkName} is incorrect'.replace('{linkName}', linkName));
+        //Check if titles is equal
+        if (await Command.compareTitles(titleFilm, nameText)){
+            assert.fail('Name on the snippet is {titleFilm}'.replace('{titleFilm}', titleFilm));
         }
 
         await browser.back();
@@ -101,13 +74,13 @@ Then (/^I can see right title of the film $/, async () => {
 
 });
 
-And (/^I can see right year$/, async () => {
+Then (/^I can see right year$/, async () => {
 
 
 
 });
 
-And (/^I can see right genre$/, async () => {
+Then (/^I can see right genre$/, async () => {
 
 
 

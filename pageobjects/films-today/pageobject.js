@@ -49,9 +49,9 @@ class FilmTodayPO
     }
 
     //get Span to get a name of the film
-    async getSpan(document)
+    async getName(document)
     {
-        return document.$('span');
+        return document.$('[class="film-poster-snippet-partial-component__title film-poster-snippet-partial-component__title_theme_default today-in-cinema-carousel-item__snippet-title"]');
     }
 
     //get Year and Genre of the film

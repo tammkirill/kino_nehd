@@ -24,7 +24,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./features/**/snippets-picture.feature'], 
+        ['./features/**/snippets-main-inform.feature'], 
     // Patterns to exclude.
     exclude: [
         //
@@ -141,7 +141,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./step-definition/films-today/snippets-picture.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ['./step-definition/films-today/snippets-main-inform.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -163,7 +163,7 @@ exports.config = {
         // <string> (expression) only execute the features or scenarios with tags matching the expression
         tagExpression: '',
         // <number> timeout for step definitions
-        timeout: 60000,
+        timeout: 100000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
         ignoreUndefinedDefinitions: false
     },

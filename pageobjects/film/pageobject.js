@@ -17,7 +17,7 @@ class FilmPO
     get poster() {return $('[data-tid="709cff27"]')}
 
     //get film name
-    get filmTitle() {return $('data-tid="67e47501"')}
+    get filmTitle() {return $('[data-tid="67e47501"]')}
 
     //get genre array
     get filmGenreArr() {return $('[data-tid="d61dc135"]')}

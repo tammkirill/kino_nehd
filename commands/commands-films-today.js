@@ -10,6 +10,7 @@ class FilmTodayCommands extends Page
     */
 
     /** Commands that do something */
+    //Compare links with regexp
     async compareLinks(stringURL, link, regularExp)
     {
         //get string lenght 
@@ -25,6 +26,19 @@ class FilmTodayCommands extends Page
         let result = (stringURLstart === link && stringURLregular.match(regularExp))? true: false;
 
         return result;
+
+    }
+
+    //Compare titles of the film
+    async compareTitles(snippetStr, rightStr)
+    {
+        //Delete a year from string
+        let tmpRightStr = rightStr.slice(0, rightStr.length - 6);
+
+        //Delete all special symbols
+        let tmpStr = snippetStr//.replace(/[^a-zа-яё0-9\s]/gi, ' ');
+
+        return tmpRightStr === tmpStr;
 
     }
 
@@ -45,6 +59,7 @@ class FilmTodayCommands extends Page
 
         return smthArr;
     }
+
 
     /**
      * overwrite specifc options to adapt it to page object

@@ -34,6 +34,8 @@ Then (/^I click on Snippet and should be on the (.+)$/, async (linkName) => {
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
 
+    snippetsArr.splice(0,1);
+
     let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
     //regExp for part of link

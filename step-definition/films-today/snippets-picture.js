@@ -37,6 +37,8 @@ Then (/^I can see right picture of the film$/, async () => {
     //get Array of snippets
     const snippetsArr = await PageObjects.snipetsArray;
 
+    snippetsArr.splice(0,1);
+
     let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
     let pictureArr = await Command.smthArray(snippetsArr, PageObjects.getPicture);
@@ -49,6 +51,8 @@ Then (/^I can see right picture of the film$/, async () => {
     {
         //tmp picture part
         let pictureItem = await pictureArr[i];
+
+        
 
         let pictureLink;
         
