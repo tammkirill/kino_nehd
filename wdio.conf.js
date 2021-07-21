@@ -24,7 +24,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./features/**/snippets-rating.feature'], 
+        ['./features/**/snippets-ticket.feature'], 
     // Patterns to exclude.
     exclude: [
         //
@@ -97,6 +97,8 @@ exports.config = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
     baseUrl: 'http://localhost',
+
+    path: '/wd/hub',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -141,7 +143,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./step-definition/films-today/snippets-rating.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ['./step-definition/films-today/snippets-ticket.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

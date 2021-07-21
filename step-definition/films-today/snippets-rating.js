@@ -66,13 +66,13 @@ Then (/^I can see rigth rating of the film$/, async () => {
         //get strictly number of rating
         ratingText = ratingText.split(/\s/);
 
-        //bad code, there is error on the site
+        //trick: there is error on the site
         if (ratingText[0] === '–' && ratingFilm === '—')
         {
             ratingFilm = '–';
         }
 
-        assert.equal(ratingText[0], ratingFilm);
+        assert.strictEqual(ratingText[0], ratingFilm);
 
         await browser.back();
         

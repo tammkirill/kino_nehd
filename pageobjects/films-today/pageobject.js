@@ -43,9 +43,9 @@ class FilmTodayPO
     }
 
     //get Arrow to scroll
-    async getArrow(document) 
+    async getArrowRight(document) 
     {
-        return document.$('[data-tid="e3b85fc5"]');
+        return document.$('[class="circle-arrow-button circle-arrow-button_theme_compact circle-arrow-button_direction_right circle-arrow-button_animation_slide circle-arrow-button_color_white carousel__button carousel__button_direction_right carousel__button_always-show today-in-cinema__carousel-button circle-arrow-button-light__slider-button circle-arrow-button-light__slider-button_direction_right"]');
     }
 
     //get Span to get a name of the film
@@ -60,10 +60,24 @@ class FilmTodayPO
         return document.$('[class="film-poster-snippet-partial-component__caption film-poster-snippet-partial-component__caption_theme_default"]')
     }
 
+    //get icon with rating
     async getRating(document)
     {
         return document.$('[data-tid="83f4f39d"]');
     }
+
+    //get small icon of the ticket
+    async getSmallTicket(document)
+    {
+        return document.$('[data-tid="55578b31"]');
+    }
+
+    //get big icon of the ticket
+    async getBigTicket(document)
+    {
+        return document.$('[class="nameplate__icon-wrapper"]');
+    }
+
 }
 
 module.exports = new FilmTodayPO();
