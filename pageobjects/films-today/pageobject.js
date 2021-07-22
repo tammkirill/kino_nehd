@@ -43,9 +43,9 @@ class FilmTodayPO
     }
 
     //get Arrow to scroll
-    async getArrowRight(document) 
+    async getArrows(document) 
     {
-        return document.$('[class="circle-arrow-button circle-arrow-button_theme_compact circle-arrow-button_direction_right circle-arrow-button_animation_slide circle-arrow-button_color_white carousel__button carousel__button_direction_right carousel__button_always-show today-in-cinema__carousel-button circle-arrow-button-light__slider-button circle-arrow-button-light__slider-button_direction_right"]');
+        return document.$$('[class="circle-arrow-button-light__button-icon circle-arrow-button__icon"]');
     }
 
     //get Span to get a name of the film
