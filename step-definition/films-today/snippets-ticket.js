@@ -79,22 +79,14 @@ Then (/^I can see bigger ticket icon only when focus snippet$/, async () => {
             assert.fail('Ticket number {i} is displayed before focused'.replace('{i}', i));
         }
 
-        if (!await ticketsBigItem.isDisplayedInViewport())
-        {
-            const carousel = await PageObjects.todayCarousel; 
-
-            let arrow = await PageObjects.getArrowRight(carousel);
-
-            await arrow.click();
-        }
-
         //wait for display
         await snippetsArr[i].waitForClickable({timeout: 1000});
 
         //focusing item
         await ticketsBigItem.moveTo();
 
-        if(!await ticketsBigItem.waitForDisplayed(100))
+        //Wait to be displayed after focus
+        if(!await ticketsBigItem.isDisplayedInViewport())
         {
             assert.fail('Ticket number {i} is not displayed after focus'.replace('{i}', i));
         }
@@ -107,7 +99,33 @@ Then (/^I can see bigger ticket icon only when focus snippet$/, async () => {
 });
 
 //And 2
-Then (/^I can click on ticket icon$/, async () => {
+Then (/^I can click on ticket icon and get to (.+)$/, async (linkName) => {
  
+    //get Array of snippets
+    const snippetsArr = await PageObjects.snipetsArray;
 
+    snippetsArr.splice(0,1);
+
+    let regExp = /^\d+\/afisha\/city\/\d+\/(day_view\/\d{4}-\d{2}-\d{2}\/){0,1}$/;
+
+    //Big ticket button
+    let ticketsBigArr = await Command.smthArray(snippetsArr, PageObjects.getBigTicket);
+
+    for (let i = 0; i < ticketsBigArr.length-1; i++)
+    {
+        //tmp ticket part
+        let ticketsBigItem = await ticketsBigArr[i];
+
+        await ticketsBigItem.click();
+
+        stringURL = await browser.getUrl();
+
+        //Check if link have right form
+        if (!await Command.compareLinks(stringURL, linkName, regExp)){
+            assert.fail('Link {stringURL} is incorrect'.replace('{stringURL}', stringURL));
+        }
+
+        await browser.back();
+       
+    }
 });

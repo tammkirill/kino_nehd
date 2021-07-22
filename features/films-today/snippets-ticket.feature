@@ -6,4 +6,8 @@ Feature: Snippet ticket
     When I see Carousel with Snippets 
     Then I can see ticket icon
     And I can see bigger ticket icon only when focus snippet
-    And I can click on ticket icon 
+    And I can click on ticket icon and get to <link>
+
+    Examples:
+      | buttonName      | link                                 |
+      | Все             | https://www.kinopoisk.ru/film/       |
