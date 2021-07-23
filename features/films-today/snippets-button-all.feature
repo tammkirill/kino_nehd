@@ -6,3 +6,7 @@ Feature: Snippet button
     When I see Carousel with Snippets 
     And I scrolled to the right maximum
     Then I can click on button All Films and get to <link>
+
+    Examples:
+      | link                                           |
+      | https://www.kinopoisk.ru/afisha/new/city/      |

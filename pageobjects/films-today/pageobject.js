@@ -30,6 +30,9 @@ class FilmTodayPO
     //get Name and Year of a film 
     get snippetName() {return $('[data-tid="67e47501"]')}
 
+    //All films in the end of carousel
+    get afishaEnd() {return $('[class="today-in-cinema__more-button"]')}
+
     //get picture of the film
     async getPicture(document) 
     {
