@@ -42,16 +42,25 @@ Then (/^I can click right button$/, async () => {
 
     const buttonPlace = await PageObjects.todayCarousel;
 
-    let ticketsArr = await Command.smthArray(snippetsArr, PageObjects.getSmallTicket);
-
+    //get 2 arrows
     let arrowsToday = await PageObjects.getArrows(buttonPlace);
 
+    //click right button
     await arrowsToday[1].click();
 
-    await arrowsToday[0].waitForClickable({ timeout: 3000 });
+    //wait to see left button
+    await arrowsToday[0].waitForClickable({ timeout: 3000, timeoutMsg: "Left button didn't show" });
 
-    await arrowsToday[0].click();
-    
+    //check if new snippets are displayed
+    for (let i = 4; i < 6; i++)
+    {
+
+        if (!await snippetsArr[i].isDisplayedInViewport())
+        {
+            assert.fail('New snippets are not displayed');
+        }
+
+    }
 
 });
 
@@ -63,6 +72,31 @@ Then (/^I can click left button$/, async () => {
 
     snippetsArr.splice(0,1);
 
-    
+    const buttonPlace = await PageObjects.todayCarousel;
+
+    //get 2 arrows
+    let arrowsToday = await PageObjects.getArrows(buttonPlace);
+
+    //wait to see left button
+    await arrowsToday[0].waitForClickable({ timeout: 3000, timeoutMsg: "Left button didn't show" });
+
+    //click on the left button
+    await arrowsToday[0].click();
+
+    //old snippets are seen
+    for (let i = 0; i < 3; i++)
+    {
+
+        await snippetsArr[i].waitForDisplayed({timeout: 4000, timeoutMsg: "Snippets not shown"});
+        
+    }
+
+    await arrowsToday[0].waitForClickable({timeout: 4000,  timeoutMsg: "Arrow still shown", reverse: true})
+
+    //check if Left arrow shown in the most left position
+    //if (await arrowsToday[0].isDisplayedInViewport())
+    //{
+    //    assert.fail('Left arrow shown');
+    //}
 
 });
