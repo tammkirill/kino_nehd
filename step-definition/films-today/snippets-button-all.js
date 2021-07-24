@@ -49,11 +49,12 @@ When (/^I scrolled to the right maximum$/, async () => {
 
     while(!await buttonLast.isDisplayedInViewport())
     {
+        //clicks are too fast
+        await browser.pause(700);
+
         //click on the left button
         await arrowsToday[1].click();
     }
-    
-
    
 
 });
@@ -61,7 +62,19 @@ When (/^I scrolled to the right maximum$/, async () => {
 
 Then (/^I can click on button All Films and get to (.+)$/, async (linkName) => {
     
-    
+    let buttonLast = await PageObjects.afishaEnd;
+
+    //click the link
+    await buttonLast.click();
+
+    let regExp = /^\d+\/$/;
+
+    let stringURL = await browser.getUrl();
+
+    //Check if link have right form
+    if (!await Command.compareLinks(stringURL, linkName, regExp)){
+        assert.fail('Link {stringURL} is incorrect'.replace('{stringURL}', stringURL));
+    }
 
 });
 

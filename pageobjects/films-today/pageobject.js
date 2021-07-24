@@ -33,6 +33,12 @@ class FilmTodayPO
     //All films in the end of carousel
     get afishaEnd() {return $('[class="today-in-cinema__more-button"]')}
 
+    //class of the right button, when it is visible
+    get buttonPlace() {return $('[class="circle-arrow-button circle-arrow-button_theme_compact circle-arrow-button_direction_right circle-arrow-button_animation_slide circle-arrow-button_color_white carousel__button carousel__button_direction_right carousel__button_always-show today-in-cinema__carousel-button circle-arrow-button-light__slider-button circle-arrow-button-light__slider-button_direction_right"]') }
+
+    //class of the right button, when it is hidden
+    get buttonHide() {return $('[class="circle-arrow-button circle-arrow-button_theme_compact circle-arrow-button_direction_right circle-arrow-button_animation_slide circle-arrow-button_color_white carousel__button carousel__button_direction_right carousel__button_always-show today-in-cinema__carousel-button circle-arrow-button-light__slider-button circle-arrow-button-light__slider-button_direction_right carousel__button_hide"]') }
+
     //get picture of the film
     async getPicture(document) 
     {
