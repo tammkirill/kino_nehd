@@ -4,8 +4,8 @@ Feature: Header 1 is bold
 
     Given I am on the <popular> page
     When I see header 1
-    Then I should see it with <font-weight>
+    Then I should see it with <font_weight>
 
     Examples:
-      | popular         | font-weight  |
+      | popular         | font_weight  |
       | popular/films/  | 700          |
