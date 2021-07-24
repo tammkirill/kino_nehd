@@ -1,7 +1,5 @@
 const Page = require('./OpenPage');
 
-const PageObjects = require('../pageobjects/films-today/pageobject');
-
 class FilmTodayCommands extends Page 
 {
     /**
