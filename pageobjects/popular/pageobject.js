@@ -30,13 +30,24 @@ class PopularPO
         return document.$('[data-tid="6cf86878"]');
     }
 
-    async getArrayChildA()
+    async getArrayChildA(document)
     {
         return document.$$('a');
     }
 
+    //get film title
+    async getFilmTitle(document)
+    {
+        return document.$('[class="selection-film-item-meta__name"]')
+    }
 
+    //get film title
+    async getFilmEngYear(document)
+    {
+        return document.$('[class="selection-film-item-meta__original-name"]')
+    }
 
+    
 }
 
 module.exports = new PopularPO();

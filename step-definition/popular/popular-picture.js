@@ -14,7 +14,7 @@ const SecondObjects = require('../../pageobjects/film/pageobject');
 
 
 Given (/I am on the (.+) page$/, async (popular) => {
-    await MainPage.open(popular);
+    await MainPage.open(popular || "");
 });
 
 When (/^I can see film snippet$/, async () => {
@@ -46,7 +46,7 @@ Then (/^I should see the right picture of the snippet$/, async () => {
     let regExp = /^\d{1,5}x\d{1,5}$/;  
 
     //check if all pictures are right
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < linksArr.length; i++)
     {
 
         let pictureItem = await picturesArr[i];

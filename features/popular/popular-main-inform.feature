@@ -5,7 +5,7 @@ Feature: Main inform for popular films
     Given I am on the <popular> page
     When I can see film snippet
     Then I should see right title of the film
-    And I should see right year and genre of the film
+    And I should see right year and eng name
 
     Examples:
       | popular                       |

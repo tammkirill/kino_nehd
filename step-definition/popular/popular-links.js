@@ -11,8 +11,9 @@ const PageObjects = require('../../pageobjects/popular/pageobject');
 const Command = require('../../commands/commands-films-today');
 
 
+
 Given (/I am on the (.+) page$/, async (popular) => {
-    await MainPage.open(popular);
+    await MainPage.open(popular || "");
 });
 
 When (/^I can see film snippet$/, async () => {

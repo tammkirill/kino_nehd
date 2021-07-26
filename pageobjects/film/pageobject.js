@@ -24,6 +24,18 @@ class FilmPO
     //get film rating
     get filmRating() {return $('[data-tid="125104c7"]')}
 
+    //get film eng name
+    get engName() {return $$('[data-tid="3bbf3321"]')}
+
+    //get Serial title
+    get serialTitle() {return $('[data-tid="35f45dae"]')}
+
+    //get Serial eng Name
+    get serialEng() {return $('[data-tid="75102d8e"]')}
+
+    //get Serial Year with country
+    get serialYear() {return $('[data-tid="2d6c4e99"]')}
+
     //get picture of the film
     async getPicture(document) 
     {

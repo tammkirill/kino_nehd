@@ -8,10 +8,10 @@ const MainPage = require('../../commands/commands-films-today');
 
 const PageObjects = require('../../pageobjects/popular/pageobject');
 
-const Command = require('../../commands/commands-films-today')
+const Command = require('../../commands/commands-films-today');
 
 Given (/^I am on the (.+) page$/, async (popular) => {
-    await MainPage.open(popular);
+    await MainPage.open(popular || "");
 });
 
 When (/^I see header 1$/, async () => {

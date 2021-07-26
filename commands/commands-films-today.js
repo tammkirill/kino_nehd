@@ -40,6 +40,19 @@ class FilmTodayCommands extends Page
 
     }
 
+    //check if the link is a film
+    async isFilmLink(stringURL)
+    {
+
+        let regExp = /^https:\/\/www\.kinopoisk\.ru\/film\/\d+\/$/
+
+        let strTMP = stringURL.match(regExp);
+
+        let result = strTMP === null ? false: true;
+
+        return result;
+    }
+
     /** Get commands */
 
     //get Array of needed things
