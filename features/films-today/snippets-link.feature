@@ -7,5 +7,5 @@ Feature: Snippet link
     Then I click on Snippet and should be on the <link>
 
     Examples:
-    |main  | buttonName      | link                                 |
-    |      | Все             | https://www.kinopoisk.ru/film/       |
+    | main  | buttonName      | link                                 |
+    |       | Все             | https://www.kinopoisk.ru/film/       |

@@ -3,7 +3,6 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const assert = require('assert');
 
 //** Check if link for snippets is correct*/
-
 const MainPage = require('../../commands/commands-films-today');
 
 const PageObjects = require('../../pageobjects/films-today/pageobject');
@@ -11,8 +10,8 @@ const PageObjects = require('../../pageobjects/films-today/pageobject');
 const Command = require('../../commands/commands-films-today');
 
 
-Given (/^I am on the (.+) page$/, async (main) => {
-    await MainPage.open(main);
+Given (/^I am on the (.*) page$/, async (main) => {
+    await MainPage.open(main|| "");
 });
 
 When (/^I see Carousel with Snippets$/, async () => {

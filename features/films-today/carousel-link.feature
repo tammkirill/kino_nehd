@@ -7,5 +7,5 @@ Feature: Carousel of films today link
     Then I should be on the page of today's films: <link>
 
     Examples:
-      | buttonName      | link                                 | main     |
-      | Все             | https://www.kinopoisk.ru/afisha/new/ |          |
+      | buttonName      | link                                 | main   |
+      | Все             | https://www.kinopoisk.ru/afisha/new/ |        |

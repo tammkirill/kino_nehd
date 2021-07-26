@@ -8,8 +8,8 @@ const MainPage = require('../../commands/commands-films-today');
 
 const PageObjects = require('../../pageobjects/films-today/pageobject');
 
-Given (/^I am on the (.+) page$/, async (main) => {
-    await MainPage.open(main);
+Given (/^I am on the (.*) page$/, async (main) => {
+    await MainPage.open(main|| "");
 });
 
 When (/^I just wait$/, async () => {

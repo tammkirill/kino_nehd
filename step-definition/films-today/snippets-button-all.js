@@ -14,8 +14,8 @@ const SecondObjects = require('../../pageobjects/film/pageobject');
 
 
 
-Given (/^I am on the (.+) page$/, async (main) => {
-    await MainPage.open(main);
+Given (/^I am on the (.*) page$/, async (main) => {
+    await MainPage.open(main|| "");
 });
 
 When (/^I see Carousel with Snippets$/, async () => {
