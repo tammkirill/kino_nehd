@@ -6,10 +6,6 @@ Contains:
 3. links
 */
 
-/**
-     * Always asking for arrays to avoid dinamic issues (if array is > 1 than tests need to be refactored)
-*/
-
 class FilmTodayPO
 {
     
