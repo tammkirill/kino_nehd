@@ -44,7 +44,7 @@ Then (/^I should see right title of the film$/, async () => {
 
 
     //check all snippets links
-    for (let i = 0; i < 0; i++)
+    for (let i = 0; i < linkArr.length; i++)
     {
         //tmp picture part
         let titleItem = await titleArr[i];
@@ -95,7 +95,7 @@ Then (/^I should see right year and eng name$/, async () => {
     let yearArr = await Command.smthArray(snippetsArr, PageObjects.getFilmEngYear);
 
     //check all snippets links
-    for (let i = 0; i < 5; i++)
+    for (let i = 0; i < linkArr.length; i++)
     {
         //tmp picture part
         let yearItem = await yearArr[i];
