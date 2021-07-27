@@ -15,8 +15,8 @@ class DigitalPO
 {
 
     //get snippets array
-    get snippetsArray() {return $('[class="item"]')}
+    get snippetsArray() {return $$('[class="item"]')}
 
 }
 
-module.exports = new FilmTodayPO();
+module.exports = new DigitalPO();
