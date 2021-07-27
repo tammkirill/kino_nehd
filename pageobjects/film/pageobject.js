@@ -27,6 +27,8 @@ class FilmPO
     //get film eng name
     get engName() {return $$('[data-tid="3bbf3321"]')}
 
+    /**Page for serial */
+
     //get Serial title
     get serialTitle() {return $('[data-tid="35f45dae"]')}
 
@@ -35,6 +37,9 @@ class FilmPO
 
     //get Serial Year with country
     get serialYear() {return $('[data-tid="2d6c4e99"]')}
+
+    //get Serial Genre
+    get serialGenre() {return $('[data-tid="df943f2f"]')}
 
     //get picture of the film
     async getPicture(document) 

@@ -40,10 +40,8 @@ Then (/^I click on Snippet and should be on the (.+)$/, async (linkName) => {
     //regExp for part of link
     let regExp = /^\d+\/$/;    
 
-    
-
     //check all snippets links
-    for (let i = 0; i < await linkArr.length-1; i++)
+    for (let i = 0; i < linkArr.length-1; i++)
     {
         
         let linkItem = await linkArr[i];
@@ -61,8 +59,5 @@ Then (/^I click on Snippet and should be on the (.+)$/, async (linkName) => {
         await browser.back();
         
     }
-
-    //check link
-    
-    
+ 
 }); 

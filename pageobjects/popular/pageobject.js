@@ -30,21 +30,33 @@ class PopularPO
         return document.$('[data-tid="6cf86878"]');
     }
 
-    async getArrayChildA(document)
+    async getChildA(document)
     {
-        return document.$$('a');
+        return document.$('a');
     }
 
     //get film title
     async getFilmTitle(document)
     {
-        return document.$('[class="selection-film-item-meta__name"]')
+        return document.$('[class="selection-film-item-meta__name"]');
     }
 
     //get film title
     async getFilmEngYear(document)
     {
-        return document.$('[class="selection-film-item-meta__original-name"]')
+        return document.$('[class="selection-film-item-meta__original-name"]');
+    }
+
+    //get coutnry and genre of the film
+    async getChildSpan(document)
+    {
+        return document.$('span');
+    }
+
+    //get Picture and Rating class
+    async getPicAndRating(document)
+    {
+        return document.$('[data-tid="9b39d766"]');
     }
 
     
