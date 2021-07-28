@@ -1,64 +1,55 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { Given, When, Then } = require("@cucumber/cucumber");
 
-const assert = require('assert');
+const assert = require("assert");
 
 //** Check if link for snippets is correct*/
 
-const MainPage = require('../../commands/commands-films-today');
+const MainPage = require("../../commands/commands-films-today");
 
-const PageObjects = require('../../pageobjects/digital/pageobject');
+const PageObjects = require("../../pageobjects/digital/pageobject");
 
-const Command = require('../../commands/commands-films-today');
+const Command = require("../../commands/commands-films-today");
 
-
-
-Given (/I am on the (.+) page$/, async (comming) => {
-    await MainPage.open(comming || "");
+Given(/I am on the (.+) page$/, async comming => {
+  await MainPage.open(comming || "");
 });
 
-When (/^I see Carousel with digital realeses$/, async () => {
-    
-    const carouselDigital = await PageObjects.carouselDigital;
+When(/^I see Carousel with digital realeses$/, async () => {
+  const carouselDigital = await PageObjects.carouselDigital;
 
-    let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
+  let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
-    //check if all snippets are displayed
-    for (let i = 0; i < snippetsArr.length; i++)
-    {
-        if (!snippetsArr[i].isDisplayed())
-        {
-            assert.fail('Snippet {i} is not displayed'.replace('{i}',i));
-        }
+  //check if all snippets are displayed
+  for (let i = 0; i < snippetsArr.length; i++) {
+    if (!snippetsArr[i].isDisplayed()) {
+      assert.fail("Snippet {i} is not displayed".replace("{i}", i));
     }
-
+  }
 });
 
-Then (/^I can click on Snippet and should be on the (.+)$/, async (linkName) => {
-    
-    const carouselDigital = await PageObjects.carouselDigital;
+Then(/^I can click on Snippet and should be on the (.+)$/, async linkName => {
+  const carouselDigital = await PageObjects.carouselDigital;
 
-    //get snippets array
-    let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
+  let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
-    let regExp = /^\d+\/$/;
+  let regExp = /^\d+\/$/;
 
-    for (let i = 0; i < snippetsArr.length; i++)
-    {
-        let snippetsItem = await snippetsArr[i];
+  for (let i = 0; i < snippetsArr.length; i++) {
+    let snippetsItem = await snippetsArr[i];
 
-        await snippetsItem.scrollIntoView();
+    await snippetsItem.scrollIntoView();
 
-        await snippetsItem.click();
+    await snippetsItem.click();
 
-        //get link of the page where we have came
-        let stringURL = await browser.getUrl();
+    let stringURL = await browser.getUrl();
 
-        //Check if link have right form
-        if (!await Command.compareLinks(stringURL, linkName, regExp)){
-            assert.fail('Link {linkName} is incorrect'.replace('{linkName}', stringURL));
-        }
-
-        await browser.back();
+    //Check if link have right form
+    if (!await Command.compareLinks(stringURL, linkName, regExp)) {
+      assert.fail(
+        "Link {linkName} is incorrect".replace("{linkName}", stringURL)
+      );
     }
-    
+
+    await browser.back();
+  }
 });

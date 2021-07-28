@@ -1,81 +1,63 @@
-const { Given, When, Then } = require('@cucumber/cucumber');
+const { Given, When, Then } = require("@cucumber/cucumber");
 
-const assert = require('assert');
+const assert = require("assert");
 
 //** Check if link for snippets is correct*/
 
-const MainPage = require('../../commands/commands');
+const MainPage = require("../../commands/commands");
 
-const PageObjects = require('../../pageobjects/films-today/pageobject');
+const PageObjects = require("../../pageobjects/films-today/pageobject");
 
-const Command = require('../../commands/commands');
+const Command = require("../../commands/commands");
 
-const SecondObjects = require('../../pageobjects/film/pageobject');
+const SecondObjects = require("../../pageobjects/film/pageobject");
 
-
-
-Given (/^I am on the (.*) page$/, async (main) => {
-    await MainPage.open(main|| "");
+Given(/^I am on the (.*) page$/, async main => {
+  await MainPage.open(main || "");
 });
 
-When (/^I see Carousel with Snippets$/, async () => {
-    //get Array of snippets
-    const snippetsArr = await PageObjects.snipetsArray;
+When(/^I see Carousel with Snippets$/, async () => {
+  const snippetsArr = await PageObjects.snipetsArray;
 
-    for (let i = 0; i < snippetsArr.length; i++) 
-    {
-        if (!snippetsArr[i].isExisting())
-        {
-            assert.fail('Snippet is not exist on the page');
-        }
+  for (let i = 0; i < snippetsArr.length; i++) {
+    if (!snippetsArr[i].isExisting()) {
+      assert.fail("Snippet is not exist on the page");
     }
-
+  }
 });
 
-Then (/^I can see rigth rating of the film$/, async () => {
-    
-    //get Array of snippets
-    const snippetsArr = await PageObjects.snipetsArray;
+Then(/^I can see rigth rating of the film$/, async () => {
+  const snippetsArr = await PageObjects.snipetsArray;
 
-    snippetsArr.splice(0,1);
+  snippetsArr.splice(0, 1);
 
-    let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
+  let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
-    let ratingArr = await Command.smthArray(snippetsArr, PageObjects.getRating);
+  let ratingArr = await Command.smthArray(snippetsArr, PageObjects.getRating);
 
+  for (let i = 0; i < linkArr.length - 1; i++) {
+    let ratingItem = await ratingArr[i];
 
-    //check all snippets links
-    for (let i = 0; i < linkArr.length-1; i++)
-    {
-        //tmp picture part
-        let ratingItem = await ratingArr[i];
+    let ratingFilm = await ratingItem.getText();
 
-        let ratingFilm = await ratingItem.getText();
-        
-        //tmp link part
-        let linkItem = await linkArr[i];
+    let linkItem = await linkArr[i];
 
-        //go to the link of snippet
-        await linkItem.click();
+    await linkItem.click();
 
-        //get object of a film title on a film page
-        const rightRating = await SecondObjects.filmRating;
+    const rightRating = await SecondObjects.filmRating;
 
-        let ratingText = await rightRating.getText();
+    let ratingText = await rightRating.getText();
 
-        //get strictly number of rating
-        ratingText = ratingText.split(/\s/);
+    //get strictly number of rating
+    ratingText = ratingText.split(/\s/);
 
-        //trick: there is error on the site
-        if (ratingText[0] === '–' && ratingFilm === '—')
-        {
-            ratingFilm = '–';
-        }
-
-        assert.strictEqual(ratingText[0], ratingFilm);
-
-        await browser.back();
-        
+    //trick: there is error on the site
+    if (ratingText[0] === "–" && ratingFilm === "—") {
+      ratingFilm = "–";
     }
 
+    assert.strictEqual(ratingText[0], ratingFilm);
+
+    await browser.back();
+  }
 });

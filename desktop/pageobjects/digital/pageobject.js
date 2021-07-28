@@ -8,27 +8,22 @@ Contains:
 */
 
 /**
-     * Always asking for arrays to avoid dinamic issues (if array is > 1 than tests need to be refactored)
-*/
+ * Always asking for arrays to avoid dinamic issues (if array is > 1 than tests need to be refactored)
+ */
 
-class DigitalPO
-{
+class DigitalPO {
+  get carouselDigital() {
+    return $('[class="premierScroll"]');
+  }
 
-    //get carousel 
-    get carouselDigital() {return $('[class="premierScroll"]')}
+  async getSnippetsArray(document) {
+    return document.$$('[class="item"]');
+  }
 
-    //get snippets array
-    async getSnippetsArray(document) 
-    {
-        return document.$$('[class="item"]')
-    }
-
-    //get picture of the snippet
-    async getSnippetPicture(document)
-    {
-        return document.$('img');
-    }
-
+  //get picture of the snippet
+  async getSnippetPicture(document) {
+    return document.$("img");
+  }
 }
 
 module.exports = new DigitalPO();
