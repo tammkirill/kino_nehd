@@ -18,7 +18,9 @@ Given (/I am on the (.+) page$/, async (comming) => {
 
 When (/^I see Carousel with digital realeses$/, async () => {
     
-    const snippetsArr = await PageObjects.snippetsArray;
+    const carouselDigital = await PageObjects.carouselDigital;
+
+    let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
     //check if all snippets are displayed
     for (let i = 0; i < snippetsArr.length; i++)
@@ -33,7 +35,9 @@ When (/^I see Carousel with digital realeses$/, async () => {
 
 Then (/^I can click on Snippet and should be on the (.+)$/, async (linkName) => {
     
-    const snippetsArr = await PageObjects.snippetsArray;
+    const carouselDigital = await PageObjects.carouselDigital;
+
+    let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
     let regExp = /^\d+\/$/;
 

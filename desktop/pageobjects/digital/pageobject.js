@@ -14,8 +14,14 @@ Contains:
 class DigitalPO
 {
 
+    //get carousel 
+    get carouselDigital() {return $('[class="premierScroll"]')}
+
     //get snippets array
-    get snippetsArray() {return $$('[class="item"]')}
+    async getSnippetsArray(document) 
+    {
+        return document.$$('[class="item"]')
+    }
 
 }
 
