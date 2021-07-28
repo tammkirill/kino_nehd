@@ -23,6 +23,12 @@ class DigitalPO
         return document.$$('[class="item"]')
     }
 
+    //get picture of the snippet
+    async getSnippetPicture(document)
+    {
+        return document.$('img');
+    }
+
 }
 
 module.exports = new DigitalPO();

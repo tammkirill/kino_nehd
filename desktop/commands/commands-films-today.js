@@ -53,6 +53,26 @@ class FilmTodayCommands extends Page
         return result;
     }
 
+    //get last digits from link
+    async getLastPart(stringURL)
+    {
+        //if last symbol is slash, then cut it
+        if (stringURL[stringURL.length-1] === '/')
+        {
+            stringURL = stringURL.slice(0, stringURL.length-1);
+        }
+
+        let URLarray = stringURL.split(/\//);
+
+        //get last part of the URL
+        let result = URLarray[URLarray.length-1];
+
+        result = result.match(/\d+/);
+
+        return result[0];
+        
+    }
+
     /** Get commands */
 
     //get Array of needed things

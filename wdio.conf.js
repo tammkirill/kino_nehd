@@ -24,7 +24,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./desktop/features/**/digital-link.feature'], 
+        ['./desktop/features/**/digital-pictures.feature'], 
     // Patterns to exclude.
     exclude: [
         //
@@ -143,7 +143,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./desktop/step-definition/digital/digital-link.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ['./desktop/step-definition/digital/digital-pictures.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

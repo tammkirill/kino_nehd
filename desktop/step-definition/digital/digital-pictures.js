@@ -33,17 +33,24 @@ When (/^I see Carousel with digital realeses$/, async () => {
 
 });
 
-Then (/^I can click on Snippet and should be on the (.+)$/, async (linkName) => {
+Then (/^I should see Snippet with right picture$/, async () => {
     
     const carouselDigital = await PageObjects.carouselDigital;
 
-    //get snippets array
     let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
-    let regExp = /^\d+\/$/;
+    let picturesArr = await Command.smthArray(snippetsArr, PageObjects.getSnippetPicture);
 
     for (let i = 0; i < snippetsArr.length; i++)
     {
+        //snippet Picture
+        let pictureItem = await picturesArr[i];
+
+        let pictureLink = await pictureItem.getAttribute('src');
+
+        let pictureDigits = await Command.getLastPart(pictureLink);
+
+        //snippet links
         let snippetsItem = await snippetsArr[i];
 
         await snippetsItem.scrollIntoView();
@@ -53,10 +60,12 @@ Then (/^I can click on Snippet and should be on the (.+)$/, async (linkName) => 
         //get link of the page where we have came
         let stringURL = await browser.getUrl();
 
-        //Check if link have right form
-        if (!await Command.compareLinks(stringURL, linkName, regExp)){
-            assert.fail('Link {linkName} is incorrect'.replace('{linkName}', stringURL));
-        }
+        
+
+        let digitsURL = await Command.getLastPart(stringURL);
+
+        //cpmpare digits from links
+        assert.strictEqual(digitsURL, pictureDigits);
 
         await browser.back();
     }
