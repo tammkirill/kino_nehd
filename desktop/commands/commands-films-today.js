@@ -70,16 +70,16 @@ class FilmTodayCommands extends Page {
   async getRusDate(date) {
     let dateArr = date.split(".");
 
-    let part1 = dateArr[0];
+    let day = dateArr[0];
 
-    let part2 = dateArr[1];
+    let month = dateArr[1];
 
-    let part3 = dateArr[2];
+    let year = dateArr[2];
 
     //0x -> x
-    part1 = await this.deleteZero(part1);
+    day = await this.deleteZero(day);
 
-    part2 = await this.deleteZero(part2);
+    month = await this.deleteZero(month);
 
     const monthArray = [
       "января",
@@ -96,9 +96,9 @@ class FilmTodayCommands extends Page {
       "декабря"
     ];
 
-    let resultStr = part1 + ' ' + monthArray[ (part2-1) ] + ' ' + part3;
+    let resultDate = day + ' ' + monthArray[ (month-1) ] + ' ' + year;
     
-    return resultStr;
+    return resultDate;
   }
 
   //delete first zero

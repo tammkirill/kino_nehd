@@ -1,10 +1,8 @@
 /**
 pageobjects of Films Today
 Contains:
-1. buttons
+1. pictures
 2. snippets
-3. links
-4. pictures
 */
 
 /**
