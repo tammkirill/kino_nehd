@@ -39,7 +39,7 @@ Then(/^I should see Snippet with right title$/, async () => {
 
     await snippetsItem.scrollIntoView();
 
-    let snippetsText = (await snippetsItem.getText()).split(/\s/);
+    let snippetsText = ( await snippetsItem.getText() ).split(/\s/);
 
     let snippetsTitle = snippetsText[1];
 
@@ -47,7 +47,7 @@ Then(/^I should see Snippet with right title$/, async () => {
 
     let filmTitle = await SecondObjects.filmTitle;
 
-    let rightText = ( await filmTitle.getText() ).split(' ');
+    let rightText = ( await filmTitle.getText() ).split(' (');
 
     let rightTitle = rightText[0];  
 
