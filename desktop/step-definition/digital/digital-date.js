@@ -10,6 +10,8 @@ const PageObjects = require("../../pageobjects/digital/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
+const SecondObjects = require("../../pageobjects/film/pageobject");
+
 Given(/I am on the (.+) page$/, async comming => {
   await MainPage.open(comming || "");
 });
@@ -27,35 +29,32 @@ When(/^I see Carousel with digital releases$/, async () => {
   }
 });
 
-Then(/^I should see Snippet with right picture$/, async () => {
+Then(/^I should see Snippet with right date of release$/, async () => {
   const carouselDigital = await PageObjects.carouselDigital;
 
   let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
-  let picturesArr = await Command.smthArray(
-    snippetsArr,
-    PageObjects.getSnippetPicture
-  );
-
   for (let i = 0; i < snippetsArr.length; i++) {
-    let pictureItem = await picturesArr[i];
-
-    let pictureLink = await pictureItem.getAttribute("src");
-
-    let pictureDigits = await Command.getLastPart(pictureLink);
-
     let snippetsItem = await snippetsArr[i];
 
     await snippetsItem.scrollIntoView();
 
+    let snippetsText = ( await snippetsItem.getText() ).split(/\s/);
+
+    let snippetsDate = snippetsText[0];
+
+    snippetsDate = await Command.getRusDate(snippetsDate);
+
     await snippetsItem.click();
 
-    let stringURL = await browser.getUrl();
+    let filmFields = await SecondObjects.fieldsDicr;
 
-    let digitsURL = await Command.getLastPart(stringURL);
+    let rightText = ( await  filmFields[filmFields.length-1].getText() ).split(', ');
+
+    let rightDate = rightText[0];
 
     //cpmpare digits from links
-    assert.strictEqual(digitsURL, pictureDigits);
+    assert.strictEqual(rightDate, snippetsDate);
 
     await browser.back();
   }

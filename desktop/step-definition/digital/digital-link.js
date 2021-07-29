@@ -14,7 +14,7 @@ Given(/I am on the (.+) page$/, async comming => {
   await MainPage.open(comming || "");
 });
 
-When(/^I see Carousel with digital realeses$/, async () => {
+When(/^I see Carousel with digital releases$/, async () => {
   const carouselDigital = await PageObjects.carouselDigital;
 
   let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);

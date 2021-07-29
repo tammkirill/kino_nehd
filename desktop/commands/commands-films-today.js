@@ -44,9 +44,9 @@ class FilmTodayCommands extends Page {
 
     let strTMP = stringURL.match(regExp);
 
-    let result = strTMP === null ? false : true;
+    let filmURL = strTMP === null ? false : true;
 
-    return result;
+    return filmURL;
   }
 
   //get last digits from link
@@ -59,11 +59,55 @@ class FilmTodayCommands extends Page {
     let URLarray = stringURL.split(/\//);
 
     //get last part of the URL
-    let result = URLarray[URLarray.length - 1];
+    let lastPart = URLarray[URLarray.length - 1];
 
-    result = result.match(/\d+/);
+    let digitsPart = lastPart.match(/\d+/);
 
-    return result[0];
+    return digitsPart[0];
+  }
+
+  //make date type 00.00.0000 - 0 month 0000
+  async getRusDate(date) {
+    let dateArr = date.split(".");
+
+    let part1 = dateArr[0];
+
+    let part2 = dateArr[1];
+
+    let part3 = dateArr[2];
+
+    //0x -> x
+    part1 = await this.deleteZero(part1);
+
+    part2 = await this.deleteZero(part2);
+
+    const monthArray = [
+      "января",
+      "февраля",
+      "марта",
+      "апреля",
+      "мая",
+      "июня",
+      "июля",
+      "августа",
+      "сентября",
+      "октября",
+      "ноября",
+      "декабря"
+    ];
+
+    let resultStr = part1 + ' ' + monthArray[ (part2-1) ] + ' ' + part3;
+    
+    return resultStr;
+  }
+
+  //delete first zero
+  async deleteZero(number) {
+    if (number[0] === "0") {
+      number = number[1];
+    }
+
+    return number;
   }
 
   /** Get commands */

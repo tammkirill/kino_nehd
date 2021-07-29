@@ -7,6 +7,11 @@ Contains:
 */
 
 class FilmPO {
+  //get All fields of discription
+  get fieldsDicr() {
+    return $$('[data-tid="df943f2f"]');
+  }
+
   get poster() {
     return $('[data-tid="709cff27"]');
   }
@@ -53,7 +58,7 @@ class FilmPO {
 
   //get Serial Genre
   get serialGenre() {
-    return $('[data-tid="df943f2f"]');
+    return $('[data-tid="d61dc135"]');
   }
 
   //get picture of the film

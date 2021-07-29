@@ -22,8 +22,9 @@ class DigitalPO {
 
   //get picture of the snippet
   async getSnippetPicture(document) {
-    return document.$("img");
+    return document.$('img');
   }
+
 }
 
 module.exports = new DigitalPO();
