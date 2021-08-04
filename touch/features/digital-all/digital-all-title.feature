@@ -4,8 +4,8 @@ Feature: Digital releases title
 
     Given I am on the <comming> page
     When I scrolled all page to the bottom
-    Then I should see all snippets
+    Then I can click on Snippet and should be on the <link>
 
     Examples:
-    | comming                  |
-    | comingsoon/digital/      |
+    | comming                  | link                            |
+    | comingsoon/digital/      | https://www.kinopoisk.ru/       |

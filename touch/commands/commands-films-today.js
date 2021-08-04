@@ -127,7 +127,7 @@ class FilmTodayCommands extends Page {
    * overwrite specifc options to adapt it to page object
    */
   async open(path) {
-    //await browser.deleteCookies();
+    await browser.deleteCookies();
     return super.open(path);
   }
 }

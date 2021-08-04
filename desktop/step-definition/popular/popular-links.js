@@ -24,9 +24,7 @@ When(/^I can see film snippet$/, async () => {
   }
 });
 
-Then(
-  /^I should be able to go to the page of this film: (.+)$/,
-  async linkName => {
+Then(/^I should be able to go to the page of this film: (.+)$/, async (linkName) => {
     const snippetsArr = await PageObjects.snippetArr;
 
     let linksArr = await Command.smthArray(snippetsArr, PageObjects.getLink);

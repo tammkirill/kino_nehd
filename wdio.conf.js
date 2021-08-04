@@ -1,4 +1,5 @@
 exports.config = {
+    port: 4723,
     //
     // ====================
     // Runner Configuration
@@ -24,7 +25,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./desktop/features/**/digital-all-title.feature'], 
+        ['./touch/features/**/digital-all-title.feature'], 
     // Patterns to exclude.
     exclude: [
         //
@@ -56,10 +57,17 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 2,
+        maxInstances: 5,
+        //appiumVersion: '1.20.2', 
+        'appium:deviceName' : 'Pixel_4_API_28',
+        'appium:uuid' : 'emulator-5554',
+        'appium:platformName' : 'Android',
+        'appium:platformVersion' : '11.0',
+        'appium:automationName' : 'UIAutomator2', 
+        browserName: 'chrome'
         //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
+        //browserName: 'chrome',
+        //acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -72,7 +80,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'debug',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -81,7 +89,7 @@ exports.config = {
     // - @wdio/mocha-framework, @wdio/jasmine-framework
     // - @wdio/local-runner
     // - @wdio/sumologic-reporter
-    // - @wdio/cli, @wdio/config, @wdio/sync, @wdio/utils
+    // - @wdio/cli, @wdio/config, @wdio/utils
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     // logLevels: {
     //     webdriver: 'info',
@@ -95,10 +103,7 @@ exports.config = {
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
-    // gets prepended directly.
-    baseUrl: 'http://localhost',
-
-    path: '/wd/hub',
+    // gets prepended directly.    
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -109,12 +114,27 @@ exports.config = {
     //
     // Default request retries count
     connectionRetryCount: 3,
+
+
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+
+    services: [
+        ['appium', {
+            args: {
+                // ...
+                port: 4233,
+                'chromedriver-executable': 'F:/Automation/webdrivers/appiumtest/chromedriver.exe'
+                // ...
+            }
+            // or
+            // args: ['-p', '4722', '--relaxed-security', '--log-level', 'info:info']
+        }]
+    ],
+    
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -143,7 +163,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./desktop/step-definition/digital-all/digital-all-title.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ['./touch/step-definition/**/digital-all-title.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
