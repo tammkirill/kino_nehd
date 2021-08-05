@@ -21,12 +21,18 @@ When(/^I scrolled all page to the bottom$/, async () => {
 
   const gnegCloseBut = await PageObjects.gnegPopupClose;
 
-  await gnegCloseBut.waitForClickable({
-    timeout: 10000,
-    timeoutMsg: "Gneg is not clickable",
-  })
-
-  await gnegCloseBut.click();
+  //if we see gneg popup
+  try{
+    await gnegCloseBut.waitForClickable({
+      timeout: 10000,
+      timeoutMsg: "Gneg is not clickable",
+    })
+  
+    await gnegCloseBut.click();
+  } catch(e) {
+    //do nothing if popup didn't show
+  }
+  
 
   await snippetsArr[0].waitForClickable({
     timeout: 2000,

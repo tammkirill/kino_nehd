@@ -1,6 +1,6 @@
-Feature: Digital releases title
+Feature: Digital releases link
 
-  Scenario Outline: When I scrolled all page to the bottom I should see all snippet
+  Scenario Outline: When I scrolled all page to the bottom I can click on snippet
 
     Given I am on the <comming> page
     When I scrolled all page to the bottom
