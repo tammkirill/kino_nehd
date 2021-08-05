@@ -4,7 +4,7 @@ const assert = require("assert");
 
 //** Check if link for snippets is correct*/
 
-const MainPage = require("../../commands/commands-films-today");
+const MainPage = require("../../../desktop/commands/commands-films-today");
 
 const PageObjects = require("../../pageobjects/digital-all/pageobject");
 
@@ -39,7 +39,6 @@ When(/^All snippets are clickable$/, async () => {
       timeoutMsg: "Item {i} is not clickable".replace('{i}', i),
     })    
   }
-  
 });
 
 Then(/^I can click on Snippet and should be on the (.+)$/, async (linkName) => {

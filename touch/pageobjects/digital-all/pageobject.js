@@ -27,7 +27,7 @@ class DigitalAllPO {
   }
 
   async getEng(document) {
-    return document.$('[class="movie-snippet__original-title"]');
+    return document.$('h3');
   }
 
   async getGenres(document) {
