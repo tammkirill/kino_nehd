@@ -16,7 +16,7 @@ Given(/I am on the (.+) page$/, async comming => {
   await MainPage.open(comming || "");
 });
 
-When(/^I scrolled all page to the bottom$/, async () => {
+When(/^All snippets are clickable$/, async () => {
   let snippetsArr = await PageObjects.snippetsArr;
 
   const gnegCloseBut = await PageObjects.gnegPopupClose;
@@ -33,11 +33,13 @@ When(/^I scrolled all page to the bottom$/, async () => {
     //do nothing if popup didn't show
   }
   
-
-  await snippetsArr[0].waitForClickable({
-    timeout: 2000,
-    timeoutMsg: "Item {i} is not clickable".replace('{i}', 0),
-  })    
+  for (let i = 0; i < snippetsArr.length; i++){
+    snippetsArr[i].waitForClickable({
+      timeout: 2000,
+      timeoutMsg: "Item {i} is not clickable".replace('{i}', i),
+    })    
+  }
+  
 });
 
 Then(/^I can click on Snippet and should be on the (.+)$/, async (linkName) => {
