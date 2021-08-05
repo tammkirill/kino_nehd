@@ -4,11 +4,11 @@ const assert = require("assert");
 
 //** Check if link for snippets is correct*/
 
-const MainPage = require("../../commands/commands");
+const MainPage = require("../../commands/commands-films-today");
 
 const PageObjects = require("../../pageobjects/films-today/pageobject");
 
-const Command = require("../../commands/commands");
+const Command = require("../../commands/commands-films-today");
 
 const SecondObjects = require("../../pageobjects/film/pageobject");
 
