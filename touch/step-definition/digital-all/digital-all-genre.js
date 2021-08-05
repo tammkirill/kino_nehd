@@ -42,32 +42,38 @@ When(/^I scrolled all page to the bottom$/, async () => {
 });
 
 //Not all has originak name, need rework
-Then(/^I should see right english name$/, async () => {
+Then(/^I should see right genres$/, async () => {
   let snippetsArr = await PageObjects.snippetsArr;
 
-  let snippetsEngName = await Command.smthArray(snippetsArr, PageObjects.getEng);
+  let snippetsGenres = await Command.smthArray(snippetsArr, PageObjects.getGenres);
 
   for (let i = 0; i < snippetsArr.length; i++) {
     snippetsArr = await PageObjects.snippetsArr;
 
-    snippetsEngName = await Command.smthArray(snippetsArr, PageObjects.getEng);
+    snippetsGenres = await Command.smthArray(snippetsArr, PageObjects.getGenres);
 
     let snippetsItem = await snippetsArr[i];
 
     await snippetsItem.scrollIntoView();
 
-    let snipNameItem = await snippetsEngName[i];
+    let snipGenresItem = await snippetsGenres[i];
 
-    let snippetName = await snipNameItem.getText();
+    let snippetGenres = await snipGenresItem.getText();
 
     await snippetsItem.click();
 
-    let nameItem = await SecondObjects.filmEngTitle;
+    let genreItem = await SecondObjects.filmYearAndGenres;
 
-    let rightName = await nameItem.getText();
+    let rightGenresYear = ( await genreItem.getText() ).split('\n');
+
+    let rightGenres = rightGenresYear[0];
+
+    rightGenres = await Command.splitYearMob(rightGenres);
+
+    snippetGenres = snippetGenres.slice(0, rightGenres.length);
 
     //Check if link have right form
-    assert.strictEqual(rightName, snippetName);
+    assert.strictEqual(rightGenres, snippetGenres);
 
     await browser.back();
   }

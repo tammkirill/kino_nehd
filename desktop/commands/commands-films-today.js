@@ -107,6 +107,22 @@ class FilmTodayCommands extends Page {
     return number;
   }
 
+  //returns string without first year, only genres
+  async splitYearMob(string) {
+    let splitPos;
+
+    for (let i = 3; i < string.length; i++){
+      if(string[i] === ' ' && string[i-1] === ',') {
+        splitPos = i;
+        break;
+      }
+    }
+
+    let strngGenres = string.slice(splitPos+1);
+
+    return strngGenres;
+  }
+
   /** Get commands */
 
   //get Array of needed things
