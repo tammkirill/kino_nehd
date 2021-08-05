@@ -22,8 +22,16 @@ class DigitalAllPO {
     return $('[class="eJXgiU"]');
   }
 
-  async getTitle(document) {
-    return document.$('[class="name"]');
+  async getYear(document) {
+    return document.$('[class="movie-snippet__year"]');
+  }
+
+  async getEng(document) {
+    return document.$('[class="movie-snippet__original-title"]');
+  }
+
+  async getGenres(document) {
+    return document.$('[class="movie-snippet__description"]');
   }
 }
 

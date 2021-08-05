@@ -8,7 +8,7 @@ const MainPage = require("../../commands/commands-films-today");
 
 const PageObjects = require("../../pageobjects/digital-all/pageobject");
 
-const Command = require("../../commands/commands-films-today");
+const Command = require("../../../desktop/commands/commands-films-today");
 
 const SecondObjects = require("../../pageobjects/film/pageobject");
 

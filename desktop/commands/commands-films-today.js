@@ -32,10 +32,7 @@ class FilmTodayCommands extends Page {
     //Delete a year from string
     let tmpRightStr = rightStr.slice(0, rightStr.length - 6);
 
-    //Delete all special symbols
-    let tmpStr = snippetStr; //.replace(/[^a-zа-яё0-9\s]/gi, ' ');
-
-    return tmpRightStr === tmpStr;
+    return tmpRightStr === snippetStr;
   }
 
   //check if the link is a film
