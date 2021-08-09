@@ -1,3 +1,26 @@
+const args = require('minimist')(process.argv.slice(4))
+
+const browsersArr = args['browser'].split('/');
+
+var capabilitiesArr = new Array();
+
+for (let i = 0; i < browsersArr.length; i++){
+	capabilitiesArr.push({
+        browserName: browsersArr[i],
+        acceptInsecureCerts: true
+    })
+}
+
+var device = 'desktop';
+
+if(args['desktop']) {
+  device = 'desktop';
+}
+
+if(args['touch']) {
+	device = 'touch';
+}
+
 exports.config = {
     //
     // ====================
@@ -24,7 +47,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./desktop/features/**/snippets-rating.feature'], 
+        ['./${device}/features/**/snippets-link.feature'.replace('${device}', device)], 
     // Patterns to exclude.
     exclude: [
         //
@@ -51,20 +74,7 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-    
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 2,
-        //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+    capabilities: capabilitiesArr,
     //
     // ===================
     // Test Configurations
@@ -103,7 +113,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 12000,
     //
     // Default request retries count
     connectionRetryCount: 3,
@@ -112,7 +122,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+    services: ['chromedriver', 'firefox-profile'],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -141,7 +151,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./desktop/step-definition/films-today/snippets-rating.js'/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ['./${device}/step-definition/**/snippets-link.js'.replace('${device}', device)/*, './features/step-definitions/steps_login_wrong.js'*/],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

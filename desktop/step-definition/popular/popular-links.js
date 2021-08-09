@@ -10,6 +10,8 @@ const PageObjects = require("../../pageobjects/popular/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
+const Regular = require("../../commands/regular-expressions");
+
 Given(/I am on the (.+) page$/, async popular => {
   await MainPage.open(popular || "");
 });
@@ -29,7 +31,7 @@ Then(/^I should be able to go to the page of this film: (.+)$/, async (linkName)
 
     let linksArr = await Command.smthArray(snippetsArr, PageObjects.getLink);
 
-    let regExp = /^(film|series)\/\d+\/$/;
+    let regExp = Regular.filmOrSeriesNumber;
 
     for (let i = 0; i < linksArr.length; i++) {
       let linkItem = await linksArr[i];

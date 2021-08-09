@@ -10,6 +10,8 @@ const PageObjects = require("../../pageobjects/films-today/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
+const Regular = require("../../commands/regular-expressions");
+
 Given(/^I am on the (.*) page$/, async main => {
   await MainPage.open(main || "");
 });
@@ -29,7 +31,7 @@ When(/^I see button named (.+) and click it$/, async button => {
 Then(/^I should be on the page of today's films: (.+)$/, async linkName => {
   let stringURL = await browser.getUrl();
 
-  let regExp = /^(city)\/\d+\/$|^\s*$/;
+  let regExp = Regular.linkAfisha;
 
   if (!await Command.compareLinks(stringURL, linkName, regExp)) {
     assert.fail(

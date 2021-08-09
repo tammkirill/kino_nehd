@@ -12,6 +12,8 @@ const Command = require("../../commands/commands-films-today");
 
 const SecondObjects = require("../../pageobjects/film/pageobject");
 
+const Regular = require("../../commands/regular-expressions");
+
 Given(/^I am on the (.*) page$/, async main => {
   await MainPage.open(main || "");
 });
@@ -29,14 +31,12 @@ When(/^I see Carousel with Snippets$/, async () => {
 Then(/^I can see right picture of the film$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
   let pictureArr = await Command.smthArray(snippetsArr, PageObjects.getPicture);
 
   //regExp for part of link
-  let regExp = /^\d{1,5}x\d{1,5}$/;
+  let regExp = Regular.filmPoster;
 
   for (let i = 0; i < linkArr.length - 1; i++) {
     let pictureItem = await pictureArr[i];

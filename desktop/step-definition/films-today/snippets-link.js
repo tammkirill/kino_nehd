@@ -9,6 +9,8 @@ const PageObjects = require("../../pageobjects/films-today/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
+const Regular = require("../../commands/regular-expressions");
+
 Given(/^I am on the (.*) page$/, async main => {
   await MainPage.open(main || "");
 });
@@ -26,11 +28,9 @@ When(/^I see Carousel with Snippets$/, async () => {
 Then(/^I click on Snippet and should be on the (.+)$/, async linkName => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
-  let regExp = /^\d+\/$/;
+  let regExp = Regular.filmNumber;
 
   for (let i = 0; i < linkArr.length - 1; i++) {
     let linkItem = await linkArr[i];

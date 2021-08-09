@@ -8,10 +8,6 @@ const MainPage = require("../../commands/commands-films-today");
 
 const PageObjects = require("../../pageobjects/films-today/pageobject");
 
-const Command = require("../../commands/commands-films-today");
-
-const SecondObjects = require("../../pageobjects/film/pageobject");
-
 Given(/^I am on the (.*) page$/, async main => {
   await MainPage.open(main || "");
 });
@@ -57,8 +53,6 @@ Then(/^I can click right button$/, async () => {
 //And 1
 Then(/^I can click left button$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
-
-  snippetsArr.splice(0, 1);
 
   const buttonPlace = await PageObjects.todayCarousel;
 

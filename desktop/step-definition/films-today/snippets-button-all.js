@@ -10,7 +10,7 @@ const PageObjects = require("../../pageobjects/films-today/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
-const SecondObjects = require("../../pageobjects/film/pageobject");
+const Regular = require("../../commands/regular-expressions");
 
 Given(/^I am on the (.*) page$/, async main => {
   await MainPage.open(main || "");
@@ -53,7 +53,7 @@ Then(/^I can click on button All Films and get to (.+)$/, async linkName => {
 
   await buttonLast.click();
 
-  let regExp = /^\d+\/$/;
+  let regExp = Regular.filmNumber;
 
   let stringURL = await browser.getUrl();
 

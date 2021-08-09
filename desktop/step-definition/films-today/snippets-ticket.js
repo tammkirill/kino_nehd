@@ -10,7 +10,7 @@ const PageObjects = require("../../pageobjects/films-today/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
-const SecondObjects = require("../../pageobjects/film/pageobject");
+const Regular = require("../../commands/regular-expressions");
 
 Given(/^I am on the (.*) page$/, async main => {
   await MainPage.open(main || "");
@@ -51,8 +51,6 @@ Then(/^I can see ticket icon$/, async () => {
 Then(/^I can see bigger ticket icon only when focus snippet$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let ticketsBigArr = await Command.smthArray(
     snippetsArr,
     PageObjects.getBigTicket
@@ -88,9 +86,7 @@ Then(/^I can see bigger ticket icon only when focus snippet$/, async () => {
 Then(/^I can click on ticket icon and get to (.+)$/, async linkName => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
-  let regExp = /^\d+\/afisha\/city\/\d+\/(day_view\/\d{4}-\d{2}-\d{2}\/){0,1}$/;
+  let regExp = Regular.filmAfishTic;
 
   let ticketsBigArr = await Command.smthArray(
     snippetsArr,

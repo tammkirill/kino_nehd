@@ -10,6 +10,8 @@ const PageObjects = require("../../pageobjects/digital/pageobject");
 
 const Command = require("../../commands/commands-films-today");
 
+const Regular = require("../../commands/regular-expressions");
+
 Given(/I am on the (.+) page$/, async comming => {
   await MainPage.open(comming || "");
 });
@@ -32,7 +34,7 @@ Then(/^I can click on Snippet and should be on the (.+)$/, async linkName => {
 
   let snippetsArr = await PageObjects.getSnippetsArray(carouselDigital);
 
-  let regExp = /^\d+\/$/;
+  let regExp = Regular.filmNumber;
 
   for (let i = 0; i < snippetsArr.length; i++) {
     let snippetsItem = await snippetsArr[i];

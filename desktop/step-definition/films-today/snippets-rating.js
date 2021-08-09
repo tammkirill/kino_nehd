@@ -29,8 +29,6 @@ When(/^I see Carousel with Snippets$/, async () => {
 Then(/^I can see rigth rating of the film$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
   let ratingArr = await Command.smthArray(snippetsArr, PageObjects.getRating);
