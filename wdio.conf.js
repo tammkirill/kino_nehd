@@ -1,4 +1,4 @@
-const args = require('minimist')(process.argv.slice(4))
+const args = require('minimist')(process.argv.slice(3))
 
 const browsersArr = args['browser'].split('/');
 
@@ -122,7 +122,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver', 'firefox-profile'],
+    services: ['chromedriver'],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -151,7 +151,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ["./${device}/step-definition/**/carousel-link.js".replace('${device}', device), "./${device}/step-definition/**/carousel-visible.js".replace('${device}', device)],
+        require: ["./${device}/step-definition/**/carousel-*.js".replace('${device}', device)],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -169,7 +169,7 @@ exports.config = {
         // <string[]> (name) specify the profile to use
         profile: [],
         // <boolean> fail if there are any undefined or pending steps
-        strict: false,
+        strict: true,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
         tagExpression: '@carousel',
         // <number> timeout for step definitions

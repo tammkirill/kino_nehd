@@ -19,11 +19,7 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  for (let i = 0; i < snippetsArr.length; i++) {
-    if (!snippetsArr[i].isExisting()) {
-      assert.fail("Snippet is not exist on the page");
-    }
-  }
+  Command.checkArray(snippetsArr, Command.checkExistance)
 });
 
 //And 1

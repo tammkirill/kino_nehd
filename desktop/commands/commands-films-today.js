@@ -167,6 +167,22 @@ class FilmTodayCommands extends Page {
 
     return assert({condition: 'true', actual, selector});
   }
+
+  async checkExistance(selector) {
+    const element = await $(selector);
+    
+    const actual = await element.isExisting();
+
+    return assert({condition: 'true', actual, selector});
+  }
+
+  async checkArray(array, getFunc) {
+    for (let i = 0; i < array.length; i++) {
+      getFunc(array[i]);
+    }
+
+    return;
+  }
 }
 
 module.exports = new FilmTodayCommands();

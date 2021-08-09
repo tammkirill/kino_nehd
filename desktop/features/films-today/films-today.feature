@@ -1,7 +1,7 @@
 Feature: Carousel of films today
 
-  Background:
-    Given I am on the main page
+  Background: 
+    Given I am on the main page 
 
 @carousel
   Scenario: When I'm on the main page I can click on link to see all films today
@@ -10,8 +10,8 @@ Feature: Carousel of films today
     Then I should be on the page of today's films: <link>
 
     Examples:
-      | buttonName      | link                                 | main   |
-      | Все             | https://www.kinopoisk.ru/afisha/new/ |        |
+      | buttonName      | link                                 |
+      | Все             | https://www.kinopoisk.ru/afisha/new/ |
 
 @carousel
   Scenario: When I'm on the main page I can see Courusel of films today
@@ -20,8 +20,8 @@ Feature: Carousel of films today
     Then I should see Carousel with <name>
 
     Examples:
-      | name            | main  |
-      | Смотрите в кино |       |
+      | name            |
+      | Смотрите в кино |
 
 @snippets
   Scenario: When I see the snippet's carousel and scrolled it to the end, I can click All films
