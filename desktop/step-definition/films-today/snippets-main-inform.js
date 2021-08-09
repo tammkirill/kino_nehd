@@ -12,8 +12,8 @@ const Command = require("../../commands/commands-films-today");
 
 const SecondObjects = require("../../pageobjects/film/pageobject");
 
-Given(/^I am on the (.*) page$/, async main => {
-  await MainPage.open(main || "");
+Given(/^I am on the main page$/, async ()  => {
+  await MainPage.open(MainPage.mainLink);
 });
 
 When(/^I see Carousel with Snippets$/, async () => {

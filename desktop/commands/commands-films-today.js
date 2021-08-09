@@ -143,6 +143,10 @@ class FilmTodayCommands extends Page {
     await browser.deleteCookies();
     return super.open(path);
   }
+
+  get mainLink() {
+    return "";
+  }
 }
 
 module.exports = new FilmTodayCommands();

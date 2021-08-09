@@ -47,7 +47,7 @@ exports.config = {
     // will be called from there.
     //
     specs:
-        ['./${device}/features/**/snippets-link.feature'.replace('${device}', device)], 
+        ["./${device}/features/**/snippets-button-all.feature".replace('${device}', device), "./${device}/features/**/snippets-buttons.feature".replace('${device}', device)], 
     // Patterns to exclude.
     exclude: [
         //
@@ -68,7 +68,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 30,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -151,7 +151,8 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./${device}/step-definition/**/snippets-link.js'.replace('${device}', device)/*, './features/step-definitions/steps_login_wrong.js'*/],
+        require: ["./${device}/step-definition/films-today/*.js".replace('${device}', device),
+        ],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -175,7 +176,7 @@ exports.config = {
         // <number> timeout for step definitions
         timeout: 100000,
         // <boolean> Enable this config to treat undefined definitions as warnings.
-        ignoreUndefinedDefinitions: false
+        ignoreUndefinedDefinitions: true
     },
     
     //
@@ -191,8 +192,11 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+     /*onPrepare: function () {        
+        ignoreSynchronization : true,       
+        browser.waitForAngular();           
+        browser.driver.manage().timeouts().implicitlyWait(30000);       
+    }*/
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.

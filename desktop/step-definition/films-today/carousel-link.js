@@ -12,8 +12,8 @@ const Command = require("../../commands/commands-films-today");
 
 const Regular = require("../../commands/regular-expressions");
 
-Given(/^I am on the (.*) page$/, async main => {
-  await MainPage.open(main || "");
+Given(/^I am on the main page$/, async ()  => {
+  await MainPage.open(MainPage.mainLink);
 });
 
 When(/^I see button named (.+) and click it$/, async button => {
