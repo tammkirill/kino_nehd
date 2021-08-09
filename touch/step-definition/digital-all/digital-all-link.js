@@ -10,7 +10,7 @@ const PageObjects = require("../../pageobjects/digital-all/pageobject");
 
 const Command = require("../../../desktop/commands/commands-films-today");
 
-const SecondObjects = require("../../pageobjects/film/pageobject");
+const Regular = require("../../../desktop/commands/regular-expressions");
 
 Given(/I am on the (.+) page$/, async comming => {
   await MainPage.open(comming || "");
@@ -44,7 +44,7 @@ When(/^All snippets are clickable$/, async () => {
 Then(/^I can click on Snippet and should be on the (.+)$/, async (linkName) => {
   let snippetsArr = await PageObjects.snippetsArr;
 
-  let regExp = /^(film|series)\/\d+\/$/;
+  let regExp = Regular.filmOrSeriesNumber;
 
   for (let i = 0; i < snippetsArr.length; i++) {
     snippetsArr = await PageObjects.snippetsArr;
