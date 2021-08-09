@@ -3,7 +3,27 @@ Feature: Carousel of films today
   Background:
     Given I am on the main page
 
+@carousel
+  Scenario: When I'm on the main page I can click on link to see all films today
 
+    When I see button named <buttonName> and click it
+    Then I should be on the page of today's films: <link>
+
+    Examples:
+      | buttonName      | link                                 | main   |
+      | Все             | https://www.kinopoisk.ru/afisha/new/ |        |
+
+@carousel
+  Scenario: When I'm on the main page I can see Courusel of films today
+
+    When I just wait
+    Then I should see Carousel with <name>
+
+    Examples:
+      | name            | main  |
+      | Смотрите в кино |       |
+
+@snippets
   Scenario: When I see the snippet's carousel and scrolled it to the end, I can click All films
 
     When I see Carousel with Snippets 
@@ -14,7 +34,7 @@ Feature: Carousel of films today
       | link                                           | main   |
       | https://www.kinopoisk.ru/afisha/new/city/      |        |
 
-
+@snippets
   Scenario: When I see the snippet's carousel, I can click on the buttons right and left to scroll carousel
 
     When I see Carousel with Snippets
@@ -25,7 +45,7 @@ Feature: Carousel of films today
       | main   |
       |        |
 
-
+@snippets
   Scenario: When I'm on the main page I can click on snippet to find out more about film
 
     When I see Carousel with Snippets
@@ -35,7 +55,7 @@ Feature: Carousel of films today
     | main  | buttonName      | link                                 |
     |       | Все             | https://www.kinopoisk.ru/film/       |
 
-
+@snippets
   Scenario: When I see the snippet's carousel, I can see title, year and genre of films
 
     When I see Carousel with Snippets
@@ -46,7 +66,7 @@ Feature: Carousel of films today
       | main   |
       |        |
 
-
+@snippets
   Scenario: When I see the snippet's carousel, I can see picture of films
 
     When I see Carousel with Snippets
@@ -56,7 +76,7 @@ Feature: Carousel of films today
       | main   |
       |        |
 
-
+@snippets
   Scenario: When I see the snippet's carousel, I can see rigth rating of the film
 
     When I see Carousel with Snippets
@@ -65,7 +85,8 @@ Feature: Carousel of films today
     Examples:
       | main   |
       |        |
-
+      
+@snippets
   Scenario: When I see the snippet's carousel, I can see icon of a ticket and click on it
  
     When I see Carousel with Snippets

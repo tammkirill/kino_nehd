@@ -1,3 +1,5 @@
+const assert = require("assert");
+
 const Page = require("./OpenPage");
 
 class FilmTodayCommands extends Page {
@@ -19,12 +21,18 @@ class FilmTodayCommands extends Page {
     let stringURLregular = await stringURL.slice(needLength);
 
     //compare expected and actual addresses
-    let result =
+    let isSimmilar =
       stringURLstart === link && stringURLregular.match(regularExp)
         ? true
         : false;
 
-    return result;
+    if (!isSimmilar) {
+      return assert.fail(
+        "Link {stringURL} is incorrect".replace("{stringURL}", stringURL)
+      );
+    } else {
+      return;
+    }
   }
 
   //Compare titles of the film
@@ -146,6 +154,18 @@ class FilmTodayCommands extends Page {
 
   get mainLink() {
     return "";
+  }
+
+/** Check something */
+
+  async checkVisible(selector, viewport) {
+    const element = await $(selector);
+    
+    const actual = viewport
+        ? await element.isDisplayedInViewport()
+        : await element.isDisplayed();
+
+    return assert({condition: 'true', actual, selector});
   }
 }
 
