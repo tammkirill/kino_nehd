@@ -285,6 +285,44 @@ class FilmTodayCommands extends Page {
       await browser.back();
     }
   }
+
+  async checkPoster(linkArr, pictureArr, rightPoster, regExp, browser, getPicture) {
+    for (let i = 0; i < linkArr.length - 1; i++) {
+      let pictureItem = await pictureArr[i];
+  
+      let pictureLink;
+  
+      if (await pictureItem.isDisplayed()) {
+        pictureLink = await pictureItem.getAttribute("src");
+      } else {
+        pictureLink = await pictureItem.getAttribute("data-src");
+      }
+  
+      let tmpSize;
+  
+      for (let i = pictureLink.length - 1; i >= 0; i--) {
+        if ((await pictureLink[i]) === "/") {
+          tmpSize = i;
+          break;
+        }
+      }
+  
+      let linkName = await pictureLink.slice(0, tmpSize + 1);
+  
+      let linkItem = await linkArr[i];
+  
+      await linkItem.click();
+
+      const rightPicture = await getPicture(rightPoster);
+  
+      let rightLink = await rightPicture.getAttribute("src");
+  
+      //Check if link have right form
+      await this.compareLinks(rightLink, linkName, regExp)
+  
+      await browser.back();
+    }
+  }
 }
 
 module.exports = new FilmTodayCommands();
