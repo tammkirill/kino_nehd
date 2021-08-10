@@ -183,6 +183,21 @@ class FilmTodayCommands extends Page {
 
     return;
   }
+
+  async checkText(selector, text) {
+    return assert.strictEqual(text, await selector.getText() );
+  }
+
+  async clickVisible(selectorVisible, button, browser) {
+    while (!await selectorVisible.isDisplayedInViewport() ) {
+      //clicks are too fast
+      await browser.pause(700);
+  
+      await button.click();
+    }
+
+    return;
+  }
 }
 
 module.exports = new FilmTodayCommands();

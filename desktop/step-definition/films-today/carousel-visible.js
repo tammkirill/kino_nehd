@@ -21,7 +21,7 @@ Then(/^I should see Carousel with (.+)$/, async name => {
   await Command.checkVisible(carousel[0], false);
 
   //get carousel Name class
-  let carouselName = await carousel[0].$("h3");
+  let carouselName = await PageObjects.getChildA(carousel[0]);
 
-  assert.strictEqual(name, await carouselName.getText() );
+  Command.checkText(carouselName, name)
 });

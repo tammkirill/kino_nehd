@@ -60,6 +60,10 @@ class FilmTodayPO {
     return document.$("a");
   }
 
+  async getChildh3(document) {
+    return document.$("h3");
+  }
+
   //get Arrow to scroll
   async getArrows(document) {
     return document.$$(

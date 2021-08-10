@@ -1,7 +1,5 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 
-const assert = require("assert");
-
 //** Check if link for snippets is correct*/
 
 const MainPage = require("../../commands/commands-films-today");
@@ -24,10 +22,6 @@ When(/^I see Carousel with Snippets$/, async () => {
 
 //And 1
 When(/^I scrolled to the right maximum$/, async () => {
-  const snippetsArr = await PageObjects.snipetsArray;
-
-  snippetsArr.splice(0, 1);
-
   const buttonPlace = await PageObjects.todayCarousel;
 
   //get 2 arrows
@@ -35,13 +29,7 @@ When(/^I scrolled to the right maximum$/, async () => {
 
   let buttonLast = await PageObjects.afishaEnd;
 
-  while (!await buttonLast.isDisplayedInViewport()) {
-    //clicks are too fast
-    await browser.pause(700);
-
-    //click on the left button
-    await arrowsToday[1].click();
-  }
+  await Command.clickVisible(buttonLast, arrowsToday[1], browser);
 });
 
 Then(/^I can click on button All Films and get to (.+)$/, async linkName => {
@@ -54,9 +42,5 @@ Then(/^I can click on button All Films and get to (.+)$/, async linkName => {
   let stringURL = await browser.getUrl();
 
   //Check if link have right form
-  if (!await Command.compareLinks(stringURL, linkName, regExp)) {
-    assert.fail(
-      "Link {stringURL} is incorrect".replace("{stringURL}", stringURL)
-    );
-  }
+  Command.compareLinks(stringURL, linkName, regExp);
 });

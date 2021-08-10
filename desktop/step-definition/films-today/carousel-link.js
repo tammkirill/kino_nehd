@@ -16,14 +16,13 @@ Given(/^I am on the main page$/, async ()  => {
   await MainPage.open(MainPage.mainLink);
 });
 
-When(/^I see button named (.+) and click it$/, async button => {
+When(/^I see button named (.+) and click it$/, async buttonName => {
   const carousel = await PageObjects.headingCarousel;
 
   //field with a link and a name
-  let carouselLink = await carousel[0].$("a");
+  let carouselLink = await PageObjects.getChildA(carousel[0]);
 
-  //Name of a button is right
-  assert.strictEqual(button, await carouselLink.getText());
+  await Command.checkText(carouselLink, buttonName);
 
   await carouselLink.click();
 });
