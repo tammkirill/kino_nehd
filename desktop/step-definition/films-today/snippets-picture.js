@@ -1,6 +1,5 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 
-const assert = require("assert");
 
 //** Check if link for snippets is correct*/
 
@@ -13,7 +12,6 @@ const Command = require("../../commands/commands-films-today");
 const SecondObjects = require("../../pageobjects/film/pageobject");
 
 const Regular = require("../../commands/regular-expressions");
-const { getPicture } = require("../../pageobjects/films-today/pageobject");
 
 Given(/^I am on the main page$/, async () => {
   await MainPage.open(MainPage.mainLink);
@@ -22,7 +20,7 @@ Given(/^I am on the main page$/, async () => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  Command.checkArray(snippetsArr, Command.checkExistance);
+  await Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 Then(/^I can see right picture of the film$/, async () => {

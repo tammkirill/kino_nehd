@@ -19,11 +19,7 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  for (let i = 0; i < snippetsArr.length; i++) {
-    if (!snippetsArr[i].isExisting()) {
-      assert.fail("Snippet is not exist on the page");
-    }
-  }
+  await Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 Then(/^I can see rigth rating of the film$/, async () => {
@@ -33,29 +29,7 @@ Then(/^I can see rigth rating of the film$/, async () => {
 
   let ratingArr = await Command.smthArray(snippetsArr, PageObjects.getRating);
 
-  for (let i = 0; i < linkArr.length - 1; i++) {
-    let ratingItem = await ratingArr[i];
+  const rightRating = await SecondObjects.filmRating;
 
-    let ratingFilm = await ratingItem.getText();
-
-    let linkItem = await linkArr[i];
-
-    await linkItem.click();
-
-    const rightRating = await SecondObjects.filmRating;
-
-    let ratingText = await rightRating.getText();
-
-    //get strictly number of rating
-    ratingText = ratingText.split(/\s/);
-
-    //trick: there is error on the site
-    if (ratingText[0] === "–" && ratingFilm === "—") {
-      ratingFilm = "–";
-    }
-
-    assert.strictEqual(ratingText[0], ratingFilm);
-
-    await browser.back();
-  }
+  await Command.checkRating(linkArr, ratingArr, rightRating, browser);
 });

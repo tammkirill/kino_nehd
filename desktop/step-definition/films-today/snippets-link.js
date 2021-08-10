@@ -18,7 +18,7 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  Command.checkArray(snippetsArr, Command.checkExistance);
+  await Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 Then(/^I click on Snippet and should be on the (.+)$/, async linkName => {

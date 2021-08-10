@@ -167,27 +167,33 @@ class FilmTodayCommands extends Page {
 
   /** Check something */
 
-  async checkVisible(selector, viewport) {
-    const element = await $(selector);
+  async checkVisible(selector, viewport = false) {
+    console.log('checkVisible');
+    const element = await selector;
+
+    const isViewport = await element.isDisplayedInViewport();
+
+    const isNotViewport = await element.isDisplayed();
 
     const actual = viewport
-      ? await element.isDisplayedInViewport()
-      : await element.isDisplayed();
+      ? isViewport 
+      : isNotViewport;
 
-    return assert({ condition: "true", actual, selector });
+    return assert.strictEqual(actual, true, "Element is not visible");
   }
 
   async checkExistance(selector) {
-    const element = await $(selector);
+    const element = await selector;
 
     const actual = await element.isExisting();
 
-    return assert({ condition: "true", actual, selector });
+    return assert.strictEqual(actual, true, "Element is not exists");
   }
 
   async checkArray(array, getFunc) {
+    console.log('checkArray');
     for (let i = 0; i < array.length; i++) {
-      getFunc(array[i]);
+      await getFunc(array[i]);
     }
 
     return;
@@ -321,6 +327,50 @@ class FilmTodayCommands extends Page {
       await this.compareLinks(rightLink, linkName, regExp)
   
       await browser.back();
+    }
+  }
+
+  async checkRating(linkArr, ratingArr, rightRating, browser) {
+    for (let i = 0; i < linkArr.length - 1; i++) {
+      let ratingItem = await ratingArr[i];
+  
+      let ratingFilm = await ratingItem.getText();
+  
+      let linkItem = await linkArr[i];
+  
+      await linkItem.click();
+  
+      let ratingText = await rightRating.getText();
+  
+      //get strictly number of rating
+      ratingText = ratingText.split(/\s/);
+  
+      //trick: there is error on the site
+      if (ratingText[0] === "–" && ratingFilm === "—") {
+        ratingFilm = "–";
+      }
+  
+      assert.strictEqual(ratingText[0], ratingFilm);
+  
+      await browser.back();
+    }
+  }
+
+  async checkBigTicket(snippetsArr, ticketsBigArr, text) {
+    for (let i = 0; i < ticketsBigArr.length - 1; i++) {
+      let ticketsBigItem = await ticketsBigArr[i];
+  
+      this.checkVisible(ticketsBigItem);
+  
+      await snippetsArr[i].waitForClickable({ timeout: 1000 });
+  
+      //focusing item
+      await ticketsBigItem.moveTo();
+  
+      //Wait to be displayed after focus
+      await this.checkVisible(ticketsBigItem, true);
+  
+      await this.checkText(ticketsBigItem, text);
     }
   }
 }

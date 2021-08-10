@@ -12,39 +12,30 @@ const Command = require("../../commands/commands-films-today");
 
 const Regular = require("../../commands/regular-expressions");
 
-Given(/^I am on the main page$/, async ()  => {
+Given(/^I am on the main page$/, async () => {
   await MainPage.open(MainPage.mainLink);
 });
 
 When(/^I see Carousel with Snippets$/, async () => {
-  //get Array of snippets
   const snippetsArr = await PageObjects.snipetsArray;
 
-  for (let i = 0; i < snippetsArr.length; i++) {
-    if (!snippetsArr[i].isExisting()) {
-      assert.fail("Snippet is not exist on the page");
-    }
-  }
+  await Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 //Then 1
 Then(/^I can see ticket icon$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let ticketsArr = await Command.smthArray(
     snippetsArr,
     PageObjects.getSmallTicket
   );
 
-  for (let i = 0; i < ticketsArr.length - 1; i++) {
-    let ticketsItem = await ticketsArr[i];
+  ticketsArr = ticketsArr.slice(0, ticketsArr.length - 1);
 
-    if (!await ticketsItem.isDisplayed()) {
-      assert.fail("Ticket number {i} is not displayed".replace("{i}", i));
-    }
-  }
+  await Command.checkArray(ticketsArr, Command.checkExistance);
+
+  await Command.checkArray(ticketsArr, Command.checkVisible);
 });
 
 //And 1
@@ -56,30 +47,9 @@ Then(/^I can see bigger ticket icon only when focus snippet$/, async () => {
     PageObjects.getBigTicket
   );
 
-  for (let i = 0; i < ticketsBigArr.length - 1; i++) {
-    let ticketsBigItem = await ticketsBigArr[i];
+  const nameTicket = "Билеты";
 
-    //check if icon is not displayed untill focused
-    if (await ticketsBigItem.isDisplayed()) {
-      assert.fail(
-        "Ticket number {i} is displayed before focused".replace("{i}", i)
-      );
-    }
-
-    await snippetsArr[i].waitForClickable({ timeout: 1000 });
-
-    //focusing item
-    await ticketsBigItem.moveTo();
-
-    //Wait to be displayed after focus
-    if (!await ticketsBigItem.isDisplayedInViewport()) {
-      assert.fail(
-        "Ticket number {i} is not displayed after focus".replace("{i}", i)
-      );
-    }
-
-    assert.strictEqual(await ticketsBigItem.getText(), "Билеты");
-  }
+  await Command.checkBigTicket(snippetsArr, ticketsBigArr, nameTicket);
 });
 
 //And 2
@@ -93,20 +63,5 @@ Then(/^I can click on ticket icon and get to (.+)$/, async linkName => {
     PageObjects.getBigTicket
   );
 
-  for (let i = 0; i < ticketsBigArr.length - 1; i++) {
-    let ticketsBigItem = await ticketsBigArr[i];
-
-    await ticketsBigItem.click();
-
-    stringURL = await browser.getUrl();
-
-    //Check if link has right form
-    if (!await Command.compareLinks(stringURL, linkName, regExp)) {
-      assert.fail(
-        "Link {stringURL} is incorrect".replace("{stringURL}", stringURL)
-      );
-    }
-
-    await browser.back();
-  }
+  await Command.checkSnippetLinks(ticketsBigArr, linkName, regExp, browser);
 });

@@ -17,7 +17,7 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  Command.checkArray(snippetsArr, Command.checkExistance);
+  await Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 //And 1
@@ -42,5 +42,5 @@ Then(/^I can click on button All Films and get to (.+)$/, async linkName => {
   let stringURL = await browser.getUrl();
 
   //Check if link have right form
-  Command.compareLinks(stringURL, linkName, regExp);
+  await Command.compareLinks(stringURL, linkName, regExp);
 });
