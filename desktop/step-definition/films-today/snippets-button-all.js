@@ -17,7 +17,7 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  Command.checkArray(snippetsArr, Command.checkExistance)
+  Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 //And 1

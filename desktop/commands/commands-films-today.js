@@ -198,6 +198,21 @@ class FilmTodayCommands extends Page {
 
     return;
   }
+
+  async checkArrowsWork(arrowButton, selectorArr, startCheck, endCheck) {
+    //click right button
+    await arrowButton.click();
+
+    //check if new snippets are displayed
+    for (let i = startCheck; i < endCheck; i++) {
+      await selectorArr[i].waitForClickable({
+        timeout: 3000,
+        timeoutMsg: "New selectors are not displayed"
+      })
+    }
+
+    return;
+  }
 }
 
 module.exports = new FilmTodayCommands();
