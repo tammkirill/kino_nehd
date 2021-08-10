@@ -82,7 +82,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'debug',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -116,7 +116,7 @@ exports.config = {
     connectionRetryTimeout: 12000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 1,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
@@ -151,7 +151,7 @@ exports.config = {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ["./${device}/step-definition/**/snippets-button-all.js".replace('${device}', device)],
+        require: ["./${device}/step-definition/**/snippets-main-inform.js".replace('${device}', device)],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

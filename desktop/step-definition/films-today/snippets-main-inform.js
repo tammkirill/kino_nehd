@@ -19,84 +19,32 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  for (let i = 0; i < snippetsArr.length; i++) {
-    if (!snippetsArr[i].isExisting()) {
-      assert.fail("Snippet is not exist on the page");
-    }
-  }
+  Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 Then(/^I can see right title of the film$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
   let titleArr = await Command.smthArray(snippetsArr, PageObjects.getName);
 
-  for (let i = 0; i < linkArr.length - 1; i++) {
-    let titleItem = await titleArr[i];
+  const rightName = await SecondObjects.filmTitle;
 
-    let titleFilm = await titleItem.getText();
-
-    let linkItem = await linkArr[i];
-
-    await linkItem.click();
-
-    const rightName = await SecondObjects.filmTitle;
-
-    let nameText = await rightName.getText();
-
-    //Check if titles are equal
-    if (await Command.compareTitles(titleFilm, nameText)) {
-      assert.fail(
-        "Name on the snippet is {titleFilm}".replace("{titleFilm}", titleFilm)
-      );
-    }
-
-    await browser.back();
-  }
+  await Command.checkFilmTitle(linkArr, titleArr, rightName, browser);
 });
 
 //flaky test
 Then(/^I can see right year and genre$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  snippetsArr.splice(0, 1);
-
   let linkArr = await Command.smthArray(snippetsArr, PageObjects.getChildA);
 
   let genreArr = await Command.smthArray(snippetsArr, PageObjects.getYearGenre);
 
-  for (let i = 0; i < linkArr.length - 1; i++) {
-    let genreItem = await genreArr[i];
+  const rightGenre = await SecondObjects.filmGenreArr;
 
-    let genreFilm = await genreItem.getText();
+  const rightYear = await SecondObjects.filmYear;
 
-    genreFilm = genreFilm.split(", ");
-
-    let linkItem = await linkArr[i];
-
-    await linkItem.click();
-
-    const rightGenre = await SecondObjects.filmGenreArr;
-
-    const rightYear = await SecondObjects.filmYear;
-
-    let stringGenre = await rightGenre.getText();
-
-    //split all genres in the line
-    stringGenre = await stringGenre.split(/(,\s)|\n/);
-
-    let stringYear = await rightYear.getText();
-
-    //check if year is right
-    assert.strictEqual(genreFilm[0], stringYear);
-
-    //check if genre is right
-    assert.strictEqual(genreFilm[1], stringGenre[0]);
-
-    await browser.back();
-  }
+  await Command.checkFilmGenre(linkArr, genreArr, rightYear, rightGenre, browser);
 });

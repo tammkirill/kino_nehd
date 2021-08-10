@@ -38,9 +38,18 @@ class FilmTodayCommands extends Page {
   //Compare titles of the film
   async compareTitles(snippetStr, rightStr) {
     //Delete a year from string
-    let tmpRightStr = rightStr.slice(0, rightStr.length - 6);
+    let tmpRightStr = rightStr.slice(0, rightStr.length - 7);
 
-    return tmpRightStr === snippetStr;
+    let snippetName = snippetStr;
+
+    for (let i = 0; i < snippetName.length; i++) {
+      if (snippetName[i] === "\n") {
+        snippetName =
+        snippetName.substr(0, i) + " " + snippetName.substr(i + 1);
+      }
+    }
+
+    return assert.strictEqual(tmpRightStr, snippetName);
   }
 
   //check if the link is a film
@@ -101,8 +110,8 @@ class FilmTodayCommands extends Page {
       "декабря"
     ];
 
-    let resultDate = day + ' ' + monthArray[ (month-1) ] + ' ' + year;
-    
+    let resultDate = day + " " + monthArray[month - 1] + " " + year;
+
     return resultDate;
   }
 
@@ -119,14 +128,14 @@ class FilmTodayCommands extends Page {
   async splitYearMob(string) {
     let splitPos;
 
-    for (let i = 3; i < string.length; i++){
-      if(string[i] === ' ' && string[i-1] === ',') {
+    for (let i = 3; i < string.length; i++) {
+      if (string[i] === " " && string[i - 1] === ",") {
         splitPos = i;
         break;
       }
     }
 
-    let strngGenres = string.slice(splitPos+1);
+    let strngGenres = string.slice(splitPos + 1);
 
     return strngGenres;
   }
@@ -156,24 +165,24 @@ class FilmTodayCommands extends Page {
     return "";
   }
 
-/** Check something */
+  /** Check something */
 
   async checkVisible(selector, viewport) {
     const element = await $(selector);
-    
-    const actual = viewport
-        ? await element.isDisplayedInViewport()
-        : await element.isDisplayed();
 
-    return assert({condition: 'true', actual, selector});
+    const actual = viewport
+      ? await element.isDisplayedInViewport()
+      : await element.isDisplayed();
+
+    return assert({ condition: "true", actual, selector });
   }
 
   async checkExistance(selector) {
     const element = await $(selector);
-    
+
     const actual = await element.isExisting();
 
-    return assert({condition: 'true', actual, selector});
+    return assert({ condition: "true", actual, selector });
   }
 
   async checkArray(array, getFunc) {
@@ -185,14 +194,14 @@ class FilmTodayCommands extends Page {
   }
 
   async checkText(selector, text) {
-    return assert.strictEqual(text, await selector.getText() );
+    return assert.strictEqual(text, await selector.getText());
   }
 
   async clickVisible(selectorVisible, button, browser) {
-    while (!await selectorVisible.isDisplayedInViewport() ) {
+    while (!await selectorVisible.isDisplayedInViewport()) {
       //clicks are too fast
       await browser.pause(700);
-  
+
       await button.click();
     }
 
@@ -208,10 +217,73 @@ class FilmTodayCommands extends Page {
       await selectorArr[i].waitForClickable({
         timeout: 3000,
         timeoutMsg: "New selectors are not displayed"
-      })
+      });
     }
 
     return;
+  }
+
+  async checkSnippetLinks(linkArr, linkName, regExp, browser) {
+    for (let i = 0; i < linkArr.length - 1; i++) {
+      let linkItem = await linkArr[i];
+
+      await linkItem.click();
+
+      let stringURL = await browser.getUrl();
+
+      //Check if link have right form
+      await this.compareLinks(stringURL, linkName, regExp);
+
+      await browser.back();
+    }
+  }
+
+  async checkFilmTitle(linkArr, titleArr, rightName, browser) {
+    for (let i = 0; i < linkArr.length - 1; i++) {
+      let titleItem = await titleArr[i];
+
+      let titleFilm = await titleItem.getText();
+
+      let linkItem = await linkArr[i];
+
+      await linkItem.click();
+
+      let nameText = await rightName.getText();
+
+      //Check if titles are equal
+      await this.compareTitles(titleFilm, nameText);
+
+      await browser.back();
+    }
+  }
+
+  async checkFilmGenre(linkArr, genreArr, rightYear, rightGenre, browser) {
+    for (let i = 0; i < linkArr.length - 1; i++) {
+      let genreItem = await genreArr[i];
+  
+      let genreFilm = await genreItem.getText();
+  
+      genreFilm = genreFilm.split(", ");
+  
+      let linkItem = await linkArr[i];
+  
+      await linkItem.click();
+  
+      let stringGenre = await rightGenre.getText();
+  
+      //split all genres in the line
+      stringGenre = await stringGenre.split(/(,\s)|\n/);
+  
+      let stringYear = await rightYear.getText();
+  
+      //check if year is right
+      assert.strictEqual(genreFilm[0], stringYear);
+  
+      //check if genre is right
+      assert.strictEqual(genreFilm[1], stringGenre[0]);
+  
+      await browser.back();
+    }
   }
 }
 

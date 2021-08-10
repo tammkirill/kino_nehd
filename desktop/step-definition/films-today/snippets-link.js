@@ -18,11 +18,7 @@ Given(/^I am on the main page$/, async ()  => {
 When(/^I see Carousel with Snippets$/, async () => {
   const snippetsArr = await PageObjects.snipetsArray;
 
-  for (let i = 0; i < snippetsArr.length; i++) {
-    if (!snippetsArr[i].isExisting()) {
-      assert.fail("Snippet is not exist on the page");
-    }
-  }
+  Command.checkArray(snippetsArr, Command.checkExistance);
 });
 
 Then(/^I click on Snippet and should be on the (.+)$/, async linkName => {
@@ -32,20 +28,5 @@ Then(/^I click on Snippet and should be on the (.+)$/, async linkName => {
 
   let regExp = Regular.filmNumber;
 
-  for (let i = 0; i < linkArr.length - 1; i++) {
-    let linkItem = await linkArr[i];
-
-    await linkItem.click();
-
-    stringURL = await browser.getUrl();
-
-    //Check if link have right form
-    if (!await Command.compareLinks(stringURL, linkName, regExp)) {
-      assert.fail(
-        "Link {stringURL} is incorrect".replace("{stringURL}", stringURL)
-      );
-    }
-
-    await browser.back();
-  }
+  await Command.checkSnippetLinks(linkArr, linkName, regExp, browser);
 });
