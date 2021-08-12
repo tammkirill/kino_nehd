@@ -2,8 +2,6 @@ const { Given, When, Then } = require("@cucumber/cucumber");
 
 const assert = require("assert");
 
-//** Check if link for films today is correct*/
-
 const MainPage = require("../../commands/commands-films-today");
 
 const PageObjects = require("../../pageobjects/popular/pageobject");
@@ -17,9 +15,7 @@ Given(/^I am on the (.+) page$/, async popular => {
 When(/^I see header 1$/, async () => {
   const header1 = await PageObjects.header1;
 
-  if (!await header1.isDisplayed()) {
-    assert.fail("Header 1 is not displayed");
-  }
+  await Command.checkVisible(header1);
 });
 
 Then(/^I should see it with (\d+)$/, async font_weight => {
@@ -27,5 +23,5 @@ Then(/^I should see it with (\d+)$/, async font_weight => {
 
   let cssWeight = await header1.getCSSProperty("font-weight");
 
-  assert.strictEqual(cssWeight.value, font_weight);
+  Command.checkText(cssWeight.value, font_weight);
 });
